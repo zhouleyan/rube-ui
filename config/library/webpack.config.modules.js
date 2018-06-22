@@ -8,6 +8,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const libPaths = require('./libPaths');
 const paths = require('../paths');
 const getClientEnvironment = require('../env');
+const version = require('../../package.json').version;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -226,7 +227,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin(env.stringified),
+    new webpack.DefinePlugin({
+      __VERSISON__: JSON.stringify(version),
+      ...env.stringified
+    }),
     new ExtractTextPlugin({
       filename: cssFilename
     })

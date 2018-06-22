@@ -1,6 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Button, Input, Scroll, Select, Validator } from './module';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const components = {
+  Button,
+  Input,
+  Scroll,
+  Select,
+  Validator
+};
+
+const Rube = {
+  /* eslint-disable no-undef */
+  version: __VERSION__,
+  ...components
+};
+
+export default Rube;
