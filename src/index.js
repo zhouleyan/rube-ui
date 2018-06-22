@@ -1,20 +1,6 @@
 // Basic
-import Button from './components/Button';
-import Input from './components/Input';
-import Scroll from './components/Scroll';
-import Select from './components/Select';
-import Validator from './components/Validator';
-
-const components = {
-  Button,
-  Input,
-  Scroll,
-  Select,
-  Validator
-};
-
-const Rube = {
-  ...components
-};
-
-export default Rube;
+export { default as Button } from './components/Button';
+export { default as Input } from './components/Input';
+export { default as Scroll } from './components/Scroll';
+export { default as Select } from './components/Select';
+export { default as Validator } from './components/Validator';
