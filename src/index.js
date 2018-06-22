@@ -5,4 +5,12 @@ import Scroll from './components/Scroll';
 import Select from './components/Select';
 import Validator from './components/Validator';
 
-export { Button, Input, Scroll, Select, Validator };
+const Rube = {
+  Button,
+  Input,
+  Scroll,
+  Select,
+  Validator
+};
+
+export default Rube;

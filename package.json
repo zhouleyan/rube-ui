@@ -1,6 +1,6 @@
 {
   "name": "rube-ui",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A fantastic mobile ui lib implement by React",
   "main": "lib/index.js",
   "module": "lib/index.js",
