@@ -4,7 +4,7 @@ import './scroll.css';
 
 class Scroll extends PureComponent {
   render() {
-    return <div class="scroll">Scroll</div>;
+    return <div className="scroll">Scroll</div>;
   }
 }
 

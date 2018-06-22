@@ -1,3 +1,4 @@
 /scripts
 /src/common
-/src/lib
+/lib
+/node_modules

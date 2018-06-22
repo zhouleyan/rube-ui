@@ -6,14 +6,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const libPaths = require('./libPaths');
-const paths = require('../paths');
 const getClientEnvironment = require('../env');
 const version = require('../../package.json').version;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
-// const publicPath = paths.servedPath;
-const publicPath = paths.servedPath;
+const publicPath = libPaths.servedPath;
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
@@ -88,7 +86,7 @@ module.exports = {
             loader: require.resolve('eslint-loader')
           }
         ],
-        include: paths.appSrc
+        include: libPaths.appSrc
       },
       {
         // "oneOf" will traverse all following loaders until one will
@@ -108,7 +106,7 @@ module.exports = {
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
-            include: paths.appSrc,
+            include: libPaths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
               compact: true
@@ -201,7 +199,7 @@ module.exports = {
     // We placed these paths second because we want `node_modules` to "win"
     // if there are any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
-    modules: ['node_modules', paths.appNodeModules].concat(
+    modules: ['node_modules', libPaths.appNodeModules].concat(
       // It is guaranteed to exist because we tweak it in `env.js`
       process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
     ),
@@ -223,7 +221,7 @@ module.exports = {
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
+      new ModuleScopePlugin(libPaths.appSrc, [libPaths.appPackageJson])
     ]
   },
   plugins: [
