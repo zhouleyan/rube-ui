@@ -15,8 +15,5 @@ git add -A
 git commit -m 'build: package'
 git push origin master
 
-# replace src/ __VERSION__
-node ./scripts/release/replace-version.js
-
 # publish
 npm publish
