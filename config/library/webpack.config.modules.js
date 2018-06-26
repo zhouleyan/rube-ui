@@ -63,7 +63,11 @@ module.exports = {
     filename: '[name]/index.js',
     chunkFilename: '[name]index.js',
     library: 'rube',
-    libraryTarget: 'umd'
+    libraryTarget: 'commonjs2'
+  },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM'
   },
   module: {
     strictExportPresence: true,
