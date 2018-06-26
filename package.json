@@ -1,13 +1,13 @@
 {
   "name": "rube-ui",
-  "version": "0.2.3",
+  "version": "0.2.4",
+  "title": "Rube-UI",
   "description": "A fantastic mobile ui lib implement by React",
   "main": "lib/index.js",
-  "module": "src/index.js",
+  "module": "es/index.js",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "buildLib": "node scripts/buildLib.js",
     "release": "bash ./scripts/release/publish.sh",
     "test": "node scripts/test.js --env=jsdom"
   },
@@ -70,9 +70,11 @@
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
     "resolve": "1.6.0",
+    "rube-tools": "0.0.7",
     "shelljs": "^0.8.2",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
+    "typescript": "^2.2.1",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",

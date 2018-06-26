@@ -8,7 +8,7 @@ rm package-lock.json
 npm install --registry=https://registry.npmjs.org
 
 # build
-npm run buildLib
+NODE_ENV=production npx rube-tools run compile
 
 # ADD commit
 git add -A
