@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 
 class Button extends PureComponent {
   render() {
-    return <div>Button</div>;
+    return <div className="rube-button">Button</div>;
   }
 }
 
