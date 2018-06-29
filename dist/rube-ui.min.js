@@ -1,6 +1,6 @@
 /*!
  * 
- *       rube-ui v0.3.3
+ *       rube-ui v0.3.4
  *       
  *       Copyright 2018-present, Rube, Inc.
  *       All rights reserved.

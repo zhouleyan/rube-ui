@@ -9,6 +9,7 @@ npm install --registry=https://registry.npmjs.org
 
 # build
 NODE_ENV=production npx rube-tools run compile
+NODE_ENV=production npx rube-tools run dist
 
 # ADD commit
 git add -A
