@@ -1,4 +1,6 @@
 /scripts
 /src/common
 /lib
+/es
+/dist
 /node_modules

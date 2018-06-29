@@ -1,12 +1,10 @@
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 // import PropTypes from 'prop-types';
 
-class Button extends PureComponent {
+export default class Button extends React.PureComponent {
   render() {
     return <div className="rube-button">Button</div>;
   }
 }
 
 Button.propTypes = {};
-
-export default Button;

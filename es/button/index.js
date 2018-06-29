@@ -2,11 +2,11 @@ import _classCallCheck from "babel-runtime/helpers/classCallCheck";
 import _createClass from "babel-runtime/helpers/createClass";
 import _possibleConstructorReturn from "babel-runtime/helpers/possibleConstructorReturn";
 import _inherits from "babel-runtime/helpers/inherits";
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 // import PropTypes from 'prop-types';
 
-var Button = function (_PureComponent) {
-    _inherits(Button, _PureComponent);
+var Button = function (_React$PureComponent) {
+    _inherits(Button, _React$PureComponent);
 
     function Button() {
         _classCallCheck(this, Button);
@@ -26,7 +26,8 @@ var Button = function (_PureComponent) {
     }]);
 
     return Button;
-}(PureComponent);
+}(React.PureComponent);
+
+export default Button;
 
 Button.propTypes = {};
-export default Button;
