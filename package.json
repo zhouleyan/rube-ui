@@ -57,6 +57,9 @@
       "git add --force"
     ]
   },
+  "linters": {
+    "*.json": ["prettier --write", "git add --force"]
+  },
   "pre-commit": "lint:staged",
   "babel": {
     "plugins": [
