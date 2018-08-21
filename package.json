@@ -222,7 +222,7 @@
     "imports-loader": "0.8.0",
     "jest-cli": "23.1.0",
     "jest-styled-components": "5.0.1",
-    "lint-staged": "7.2.0",
+    "lint-staged": "7.2.2",
     "ngrok": "3.0.1",
     "node-plop": "0.15.0",
     "null-loader": "0.1.1",
