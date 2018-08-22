@@ -166,7 +166,8 @@
   },
   "sideEffects": [
     "es/**/style/*",
-    "lib/**/style/*"
+    "lib/**/style/*",
+    "app/components/**/style/*"
   ],
   "dependencies": {
     "babel-polyfill": "6.26.0",
