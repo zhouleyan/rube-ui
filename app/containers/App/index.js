@@ -16,11 +16,8 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 export default function App() {
   return (
     <div>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
+      <Helmet titleTemplate="%s - Rube-UI" defaultTitle="Rube-UI">
+        <meta name="description" content="A Rube-UI application" />
       </Helmet>
       <Switch>
         <Route exact path="/" component={HomePage} />
