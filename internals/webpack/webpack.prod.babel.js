@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const OfflinePlugin = require('offline-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { HashedModuleIdsPlugin } = require('webpack');
 
 module.exports = require('./webpack.base.babel')({
@@ -43,6 +44,10 @@ module.exports = require('./webpack.base.babel')({
         minifyURLs: true,
       },
       inject: true,
+    }),
+
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
     }),
 
     // Put it in the end to capture all the HtmlWebpackPlugin's
