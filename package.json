@@ -1,16 +1,18 @@
 {
-  "name": "react-boilerplate",
+  "name": "rube-ui",
   "version": "3.6.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "description": "rube-ui",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git@github.com:zhouleyan/rube-ui.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8"
   },
-  "author": "Max Stoiber",
+  "author": "zhouleyan",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
@@ -145,6 +147,10 @@
       "enzyme-to-json/serializer"
     ]
   },
+  "sideEffects": [
+    "es/**/style/*",
+    "lib/**/style/*"
+  ],
   "dependencies": {
     "babel-polyfill": "6.26.0",
     "chalk": "^2.4.1",
