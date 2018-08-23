@@ -112,13 +112,13 @@ function compile(modules) {
   return merge2([less, assets, js, dirnames]);
 }
 
-// gulp.task('compile', ['compile-with-es'], () => {
-//   compile();
-// });
-
-gulp.task('compile', () => {
-  compile(false);
+gulp.task('compile', ['compile-with-es'], () => {
+  compile();
 });
+
+// gulp.task('compile', () => {
+//   compile(false);
+// });
 
 gulp.task('compile-with-es', () => {
   compile(false);
