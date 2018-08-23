@@ -93,16 +93,32 @@ function compile(modules) {
   const source = ['app/components/**/*.js', 'app/components/**/*.jsx'];
   const js = babelify(gulp.src(source), modules);
 
-  return merge2([less, assets, js]);
+  // handle components dirname to lower case
+  const dirnames = gulp
+    .src(['app/components/*'])
+    .pipe(
+      /* eslint-disable no-param-reassign */
+      through2.obj(function z(file, encoding, next) {
+        const strArr = file.path.split(path.sep);
+        strArr[strArr.length - 1] = strArr[strArr.length - 1].toLowerCase();
+        file.path = strArr.join(path.sep);
+        this.push(file);
+        next();
+      }),
+      /* eslint-enable no-param-reassign */
+    )
+    .pipe(gulp.dest(modules === false ? esDir : libDir));
+
+  return merge2([less, assets, js, dirnames]);
 }
 
-gulp.task('compile', ['compile-with-es'], () => {
-  compile();
-});
-
-// gulp.task('compile', () => {
-//   compile(false);
+// gulp.task('compile', ['compile-with-es'], () => {
+//   compile();
 // });
+
+gulp.task('compile', () => {
+  compile(false);
+});
 
 gulp.task('compile-with-es', () => {
   compile(false);

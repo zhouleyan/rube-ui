@@ -1,6 +1,6 @@
 {
   "name": "rube-ui",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "rube-ui",
   "main": "lib/index.js",
   "module": "es/index.js",
