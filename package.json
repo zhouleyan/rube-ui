@@ -1,6 +1,6 @@
 {
   "name": "rube-ui",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "rube-ui",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -54,7 +54,7 @@
   "files": [
     "lib",
     "es",
-    "internals/scripts/npmcheckversion.js"
+    "internals/scripts"
   ],
   "lint-staged": {
     "linters": {
