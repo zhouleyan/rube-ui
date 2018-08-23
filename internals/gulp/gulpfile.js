@@ -99,9 +99,16 @@ function compile(modules) {
     .pipe(
       /* eslint-disable no-param-reassign */
       through2.obj(function z(file, encoding, next) {
-        const strArr = file.path.split(path.sep);
-        strArr[strArr.length - 1] = strArr[strArr.length - 1].toLowerCase();
-        file.path = strArr.join(path.sep);
+        if (file.path.match(/\/index\.js/)) {
+          const content = file.contents.toString(encoding);
+          file.contents = Buffer.from(
+            content.replace(/\.\/.*'/g, str => str.toLowerCase()),
+          );
+        } else {
+          const strArr = file.path.split(path.sep);
+          strArr[strArr.length - 1] = strArr[strArr.length - 1].toLowerCase();
+          file.path = strArr.join(path.sep);
+        }
         this.push(file);
         next();
       }),
