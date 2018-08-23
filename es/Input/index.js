@@ -8,28 +8,23 @@ import React, { PureComponent } from 'react';
 
 /* eslint-disable react/prefer-stateless-function */
 
-const Input = (function(_PureComponent) {
+var Input = function (_PureComponent) {
   _inherits(Input, _PureComponent);
 
   function Input() {
     _classCallCheck(this, Input);
 
-    return _possibleConstructorReturn(
-      this,
-      (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments),
-    );
+    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
   }
 
-  _createClass(Input, [
-    {
-      key: 'render',
-      value: function render() {
-        return _jsx('div', {}, void 0, 'Input');
-      },
-    },
-  ]);
+  _createClass(Input, [{
+    key: 'render',
+    value: function render() {
+      return _jsx('div', {}, void 0, 'Input');
+    }
+  }]);
 
   return Input;
-})(PureComponent);
+}(PureComponent);
 
 export default Input;

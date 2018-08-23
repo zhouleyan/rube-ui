@@ -48,7 +48,8 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "compile": "cross-env NODE_ENV=production node ./internals/gulp/cli/index.js"
+    "compile": "cross-env NODE_ENV=production node ./internals/gulp/cli/index.js",
+    "release": "bash ./internals/scripts/release/publish.sh"
   },
   "files": [
     "lib",
