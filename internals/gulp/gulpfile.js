@@ -93,30 +93,7 @@ function compile(modules) {
   const source = ['app/components/**/*.js', 'app/components/**/*.jsx'];
   const js = babelify(gulp.src(source), modules);
 
-  // handle components dirname to lower case
-  const dirnames = gulp
-    .src(['app/components/*'])
-    .pipe(
-      /* eslint-disable no-param-reassign */
-      through2.obj(function z(file, encoding, next) {
-        if (file.path.match(/\/index\.js/)) {
-          const content = file.contents.toString(encoding);
-          file.contents = Buffer.from(
-            content.replace(/\.\/.*'/g, str => str.toLowerCase()),
-          );
-        } else {
-          const strArr = file.path.split(path.sep);
-          strArr[strArr.length - 1] = strArr[strArr.length - 1].toLowerCase();
-          file.path = strArr.join(path.sep);
-        }
-        this.push(file);
-        next();
-      }),
-      /* eslint-enable no-param-reassign */
-    )
-    .pipe(gulp.dest(modules === false ? esDir : libDir));
-
-  return merge2([less, assets, js, dirnames]);
+  return merge2([less, assets, js]);
 }
 
 gulp.task('compile', ['compile-with-es'], () => {
