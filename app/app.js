@@ -56,9 +56,6 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          {/* <Switch>
-            <Route path="/auth" component={Auth} />
-          </Switch> */}
           <App />
         </ConnectedRouter>
       </LanguageProvider>
