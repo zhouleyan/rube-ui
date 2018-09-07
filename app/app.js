@@ -12,6 +12,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+// import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 // import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
@@ -55,6 +56,9 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
+          {/* <Switch>
+            <Route path="/auth" component={Auth} />
+          </Switch> */}
           <App />
         </ConnectedRouter>
       </LanguageProvider>
