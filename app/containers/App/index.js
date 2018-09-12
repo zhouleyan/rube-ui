@@ -9,31 +9,32 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
-
-// import HomePage from 'containers/HomePage/Loadable';
 import Authorized from 'utils/auth';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+// import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import AuthLayout from 'layouts/AuthLayout/Loadable';
 import BasicLayout from 'layouts/BasicLayout/Loadable';
+import { getQueryPath } from 'utils/utils';
 
 const { AuthorizedRoute } = Authorized;
 
 export default function App() {
-  /*  */
   return (
     <div>
       <Helmet titleTemplate="%s - Rube-UI" defaultTitle="Rube-UI">
         <meta name="description" content="A Rube-UI application" />
       </Helmet>
       <Switch>
-        {/* <Route exact path="/" component={HomePage} /> */}
+        <Route path="/auth" component={AuthLayout} />
         <AuthorizedRoute
-          a="a"
           path="/"
           render={props => <BasicLayout {...props} />}
-          authority={['admin', 'user']}
-          redirectPath="/405"
+          authority={['admins', 'user']}
+          redirectPath={getQueryPath('/auth/login', {
+            redirect: window.location.href,
+          })}
         />
-        <Route path="" component={NotFoundPage} />
+        {/* TODO: 将NotFoundPage移至BasicLayout内实现 */}
+        {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
     </div>
   );
