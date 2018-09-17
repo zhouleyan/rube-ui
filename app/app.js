@@ -12,10 +12,10 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-// import { Switch, Route } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router/immutable';
 // import FontFaceObserver from 'fontfaceobserver';
-import createHistory from 'history/createBrowserHistory';
+// import createHistory from 'history/createBrowserHistory';
+
 import 'sanitize.css';
 
 // Import root app
@@ -36,6 +36,8 @@ import { translationMessages } from './i18n';
 // Import CSS reset and Global Styles
 import './global-styles';
 
+import history from './history';
+
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 // const openSansObserver = new FontFaceObserver('Open Sans', {});
@@ -47,7 +49,7 @@ import './global-styles';
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
+// const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 

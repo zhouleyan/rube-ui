@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 /* eslint-disable react/prefer-stateless-function, no-console */
 class BasicLayout extends Component {
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   render() {

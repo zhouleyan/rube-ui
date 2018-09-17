@@ -1,5 +1,5 @@
 /**
- * Asynchronously loads the component for AuthLayout
+ * Asynchronously loads the component for Login
  */
 import Loadable from 'react-loadable';
 

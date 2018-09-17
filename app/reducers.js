@@ -4,10 +4,12 @@
 
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router/immutable';
 
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+
+import history from './history';
 
 /*
  * routeReducer
@@ -19,19 +21,21 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 // Initial routing state
 const routeInitialState = fromJS({
-  location: null,
+  location: history.location,
+  action: history.action,
 });
 
 /**
  * Merge route into the global application state
  */
-export function routeReducer(state = routeInitialState, action) {
-  switch (action.type) {
+export function routeReducer(
+  state = routeInitialState,
+  { type, payload } = {},
+) {
+  switch (type) {
     /* istanbul ignore next */
     case LOCATION_CHANGE:
-      return state.merge({
-        location: action.payload,
-      });
+      return state.merge(payload);
     default:
       return state;
   }
@@ -42,7 +46,7 @@ export function routeReducer(state = routeInitialState, action) {
  */
 export default function createReducer(injectedReducers) {
   return combineReducers({
-    route: routeReducer,
+    router: routeReducer,
     global: globalReducer,
     language: languageProviderReducer,
     ...injectedReducers,

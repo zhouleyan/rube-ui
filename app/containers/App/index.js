@@ -17,9 +17,9 @@ import { getQueryPath } from 'utils/utils';
 
 const { AuthorizedRoute } = Authorized;
 
-export default function App() {
+function App() {
   return (
-    <div>
+    <React.Fragment>
       <Helmet titleTemplate="%s - Rube-UI" defaultTitle="Rube-UI">
         <meta name="description" content="A Rube-UI application" />
       </Helmet>
@@ -29,13 +29,16 @@ export default function App() {
           path="/"
           render={props => <BasicLayout {...props} />}
           authority={['admins', 'user']}
-          redirectPath={getQueryPath('/auth/login', {
-            redirect: window.location.href,
-          })}
+          redirectTo={{
+            pathname: '/auth/login',
+            search: getQueryPath('', { redirect: window.location.href }),
+          }}
         />
         {/* TODO: 将NotFoundPage移至BasicLayout内实现 */}
         {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
-    </div>
+    </React.Fragment>
   );
 }
+
+export default App;
