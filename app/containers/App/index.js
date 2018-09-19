@@ -24,7 +24,7 @@ function App() {
         <meta name="description" content="A Rube-UI application" />
       </Helmet>
       <Switch>
-        <Route path="/auth" component={AuthLayout} />
+        <Route path="/auth" render={props => <AuthLayout {...props} />} />
         <AuthorizedRoute
           path="/"
           render={props => <BasicLayout {...props} />}

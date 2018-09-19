@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -22,14 +22,12 @@ const getLoginPathWithRedirectPath = redirectPath => {
 };
 
 /* eslint-disable react/prefer-stateless-function, no-console */
-class AuthLayout extends PureComponent {
+class AuthLayout extends Component {
   componentDidMount() {
     console.log('AuthLayout Mounted!');
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     console.log('AuthLayout Updated!');
-    console.log(prevProps);
-    console.log(this.props);
   }
   render() {
     const {

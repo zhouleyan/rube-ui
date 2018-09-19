@@ -9,6 +9,5 @@ export function getQueryPath(path = '', query = {}) {
 }
 
 export function getPageQuery() {
-  // console.log(window.location.href);
   return parse(window.location.href.split('?')[1]);
 }

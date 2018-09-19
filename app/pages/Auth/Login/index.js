@@ -1,11 +1,19 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router/immutable';
 import PropTypes from 'prop-types';
 
 /* eslint-disable react/prefer-stateless-function, no-console */
-class Login extends PureComponent {
+class Login extends Component {
+  componentDidMount() {
+    console.log('Login Mounted!');
+  }
+
+  componentDidUpdate() {
+    console.log('Login Updated!');
+  }
+
   render() {
     const { onPush } = this.props;
     return (
@@ -34,8 +42,6 @@ function mapDispatchToProps(dispatch) {
 
 Login.propTypes = {
   onPush: PropTypes.func,
-  // match: PropTypes.object,
-  // location: PropTypes.object,
 };
 
 // export default Login;
