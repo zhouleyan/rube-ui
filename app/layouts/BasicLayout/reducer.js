@@ -1,5 +1,5 @@
 /*
- * authReducer
+ * basicReducer
  *
  * The reducer takes care of our data. Using actions, we can change our
  * route data state.
@@ -12,14 +12,14 @@
 import { fromJS } from 'immutable';
 
 export const initialState = fromJS({
-  auth: 'bar',
+  basic: 'foo',
 });
 
-function authReducer(state = initialState, action) {
+function basicReducer(state = initialState, action) {
   switch (action.type) {
     default:
       return state;
   }
 }
 
-export default authReducer;
+export default basicReducer;

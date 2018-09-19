@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { push } from 'connected-react-router/immutable';
 import PropTypes from 'prop-types';
+
+import { setAuthority } from 'utils/auth/authority';
 
 /* eslint-disable react/prefer-stateless-function, no-console */
 class Login extends Component {
@@ -15,37 +18,32 @@ class Login extends Component {
   }
 
   render() {
-    const { onPush } = this.props;
+    const { dispatch } = this.props;
     return (
       <Fragment>
         <Helmet>
           <title>Login</title>
           <meta name="description" content="A Rube-UI application loginpage" />
         </Helmet>
-        <div>
-          Login
-          <button onClick={onPush}>返回</button>
-        </div>
+        <div>Login</div>
+        <button
+          onClick={evt => {
+            if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+            setAuthority('admins');
+            dispatch(push('/'));
+          }}
+        >
+          登录
+        </button>
       </Fragment>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onPush: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(push('/'));
-    },
-  };
-}
-
 Login.propTypes = {
-  onPush: PropTypes.func,
+  dispatch: PropTypes.func,
 };
 
-// export default Login;
-export default connect(
-  undefined,
-  mapDispatchToProps,
-)(Login);
+const withConnect = connect();
+
+export default compose(withConnect)(Login);

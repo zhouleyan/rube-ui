@@ -2,6 +2,9 @@
 import AuthLayout from 'layouts/AuthLayout/Loadable';
 import Login from 'pages/Auth/Login/Loadable';
 
+/* Basic */
+import BasicLayout from 'layouts/BasicLayout/Loadable';
+
 /**
  * < route 对象属性 >
  * path: 路径 required
@@ -32,5 +35,11 @@ export default [
         redirect: '/auth/login',
       },
     ],
+  },
+  // Basic
+  {
+    path: '/',
+    component: BasicLayout,
+    routes: [],
   },
 ];

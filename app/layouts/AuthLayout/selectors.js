@@ -6,7 +6,7 @@ import { initialState } from './reducer';
 
 const selectAuth = state => state.get('auth', initialState);
 
-const makeSelectRouteData = () =>
-  createSelector(selectAuth, authState => authState.get('routeData').toJS());
+const makeSelectAuth = () =>
+  createSelector(selectAuth, authState => authState.toJS());
 
-export { makeSelectRouteData };
+export { makeSelectAuth };

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { getPageQuery, getQueryPath } from 'utils/utils';
 
 import injectReducer from 'utils/injectReducer';
-import { makeSelectRouteData } from './selectors';
+import { makeSelectAuth } from './selectors';
 import reducer from './reducer';
 
 const getLoginPathWithRedirectPath = redirectPath => {
@@ -22,7 +22,7 @@ const getLoginPathWithRedirectPath = redirectPath => {
 };
 
 /* eslint-disable react/prefer-stateless-function, no-console */
-class AuthLayout extends Component {
+class AuthLayout extends PureComponent {
   componentDidMount() {
     console.log('AuthLayout Mounted!');
   }
@@ -30,9 +30,7 @@ class AuthLayout extends Component {
     console.log('AuthLayout Updated!');
   }
   render() {
-    const {
-      routeData: { routes },
-    } = this.props;
+    const { routes } = this.props;
     return (
       <Fragment>
         <Helmet>
@@ -68,11 +66,11 @@ class AuthLayout extends Component {
 }
 
 AuthLayout.propTypes = {
-  routeData: PropTypes.object,
+  routes: PropTypes.array,
 };
 
-const mapStateToProps = createSelector(makeSelectRouteData(), routeData => ({
-  routeData,
+const mapStateToProps = createSelector(makeSelectAuth(), auth => ({
+  auth,
 }));
 
 const withConnect = connect(mapStateToProps);

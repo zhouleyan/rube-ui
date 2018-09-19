@@ -13,13 +13,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router/immutable';
-// import FontFaceObserver from 'fontfaceobserver';
-// import createHistory from 'history/createBrowserHistory';
 
 import 'sanitize.css';
 
 // Import root app
 import App from 'containers/App';
+
+// Import routeData
+import routeData from 'config/routeData';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -38,19 +39,11 @@ import './global-styles';
 
 import history from './history';
 
-// Observe loading of Open Sans (to remove open sans, remove the <link> tag in
-// the index.html file and this observer)
-// const openSansObserver = new FontFaceObserver('Open Sans', {});
-
-// When Open Sans is loaded, add a font-family using Open Sans to the body
-// openSansObserver.load().then(() => {
-//   document.body.classList.add('fontLoaded');
-// });
+const initialState = {};
 
 // Create redux store with history
-const initialState = {};
-// const history = createHistory();
 const store = configureStore(initialState, history);
+
 const MOUNT_NODE = document.getElementById('app');
 
 const render = messages => {
@@ -58,7 +51,7 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <App routeData={routeData} />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

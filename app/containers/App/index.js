@@ -7,27 +7,33 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import Authorized from 'utils/auth';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import AuthLayout from 'layouts/AuthLayout/Loadable';
-import BasicLayout from 'layouts/BasicLayout/Loadable';
 import { getQueryPath } from 'utils/utils';
 
 const { AuthorizedRoute } = Authorized;
 
-function App() {
+function App({ routeData }) {
+  const [
+    { component: AuthLayout, routes: authRoutes },
+    { component: BasicLayout, routes: basicRoutes },
+  ] = routeData;
   return (
     <React.Fragment>
       <Helmet titleTemplate="%s - Rube-UI" defaultTitle="Rube-UI">
         <meta name="description" content="A Rube-UI application" />
       </Helmet>
       <Switch>
-        <Route path="/auth" render={props => <AuthLayout {...props} />} />
+        <Route
+          path="/auth"
+          render={props => <AuthLayout {...props} routes={authRoutes} />}
+        />
         <AuthorizedRoute
           path="/"
-          render={props => <BasicLayout {...props} />}
+          render={props => <BasicLayout {...props} routes={basicRoutes} />}
           authority={['admins', 'user']}
           redirectTo={{
             pathname: '/auth/login',
@@ -40,5 +46,9 @@ function App() {
     </React.Fragment>
   );
 }
+
+App.propTypes = {
+  routeData: PropTypes.array,
+};
 
 export default App;
