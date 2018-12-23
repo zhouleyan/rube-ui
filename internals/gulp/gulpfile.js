@@ -56,7 +56,8 @@ function babelify(js, modules) {
   return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
 }
 
-function compile(modules) {
+module.exports = function compile(modules) {
+  console.log(modules);
   rimraf.sync(modules !== false ? libDir : esDir);
   // handle less
   const less = gulp
@@ -94,16 +95,4 @@ function compile(modules) {
   const js = babelify(gulp.src(source), modules);
 
   return merge2([less, assets, js]);
-}
-
-gulp.task('compile', ['compile-with-es'], () => {
-  compile();
-});
-
-// gulp.task('compile', () => {
-//   compile(false);
-// });
-
-gulp.task('compile-with-es', () => {
-  compile(false);
-});
+};
