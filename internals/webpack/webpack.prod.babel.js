@@ -5,12 +5,17 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const OfflinePlugin = require('offline-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { HashedModuleIdsPlugin } = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = require('./webpack.base.babel')({
   mode: 'production',
 
   // In production, we skip all hot-reloading stuff
-  entry: [path.join(process.cwd(), 'app/app.js')],
+  entry: [
+    require.resolve('react-app-polyfill/ie11'),
+    path.join(process.cwd(), 'app/app.js'),
+  ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
@@ -20,10 +25,49 @@ module.exports = require('./webpack.base.babel')({
 
   optimization: {
     minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          warning: false,
+          compress: {
+            compression: false,
+          },
+          parse: {},
+          mangle: true,
+          output: {
+            comments: false,
+            ascii_only: true,
+          },
+        },
+        parallel: true,
+        cache: true,
+        sourceMap: true,
+      }),
+    ],
     nodeEnv: 'production',
     sideEffects: true,
     concatenateModules: true,
-    splitChunks: { chunks: 'all' },
+    splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: true,
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+        main: {
+          chunks: 'all',
+          minChunks: 2,
+          reuseExistingChunk: true,
+          enforce: true,
+        },
+      },
+    },
     runtimeChunk: true,
   },
 
@@ -74,6 +118,13 @@ module.exports = require('./webpack.base.babel')({
       safeToUseOptionalCaches: true,
     }),
 
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
+
     new WebpackPwaManifest({
       name: 'Rube-UI',
       short_name: 'Rube-UI',
@@ -84,6 +135,11 @@ module.exports = require('./webpack.base.babel')({
         {
           src: path.resolve('app/images/icon-512x512.png'),
           sizes: [72, 96, 120, 128, 144, 152, 167, 180, 192, 384, 512],
+        },
+        {
+          src: path.resolve('app/images/icon-512x512.png'),
+          sizes: [120, 152, 167, 180],
+          ios: true,
         },
       ],
     }),

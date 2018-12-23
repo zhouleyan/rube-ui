@@ -14,6 +14,8 @@ import Authorized from 'utils/auth';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import { getQueryPath } from 'utils/utils';
 
+import GlobalStyle from '../../global-styles';
+
 const { AuthorizedRoute } = Authorized;
 
 function App({ routeData }) {
@@ -43,6 +45,7 @@ function App({ routeData }) {
         {/* TODO: 将NotFoundPage移至BasicLayout内实现 */}
         {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
+      <GlobalStyle />
     </React.Fragment>
   );
 }

@@ -14,9 +14,11 @@ import getInjectors from './reducerInjectors';
 export default ({ key, reducer }) => WrappedComponent => {
   class ReducerInjector extends React.Component {
     static WrappedComponent = WrappedComponent;
+
     static contextTypes = {
       store: PropTypes.object.isRequired,
     };
+
     static displayName = `withReducer(${WrappedComponent.displayName ||
       WrappedComponent.name ||
       'Component'})`;
@@ -27,7 +29,7 @@ export default ({ key, reducer }) => WrappedComponent => {
       injectReducer(key, reducer);
     }
 
-    injectors = getInjectors(this.context.store);
+    injectors = getInjectors(this.context.store); // eslint-disable-line
 
     render() {
       return <WrappedComponent {...this.props} />;

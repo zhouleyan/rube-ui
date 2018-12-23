@@ -7,6 +7,9 @@ import { initialState } from './reducer';
 const selectBasic = state => state.get('basic', initialState);
 
 const makeSelectBasic = () =>
-  createSelector(selectBasic, basicState => basicState.toJS());
+  createSelector(
+    selectBasic,
+    basicState => basicState.toJS(),
+  );
 
 export { makeSelectBasic };

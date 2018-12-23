@@ -26,9 +26,11 @@ class AuthLayout extends PureComponent {
   componentDidMount() {
     console.log('AuthLayout Mounted!');
   }
+
   componentDidUpdate() {
     console.log('AuthLayout Updated!');
   }
+
   render() {
     const { routes } = this.props;
     return (
@@ -69,9 +71,12 @@ AuthLayout.propTypes = {
   routes: PropTypes.array,
 };
 
-const mapStateToProps = createSelector(makeSelectAuth(), auth => ({
-  auth,
-}));
+const mapStateToProps = createSelector(
+  makeSelectAuth(),
+  auth => ({
+    auth,
+  }),
+);
 
 const withConnect = connect(mapStateToProps);
 

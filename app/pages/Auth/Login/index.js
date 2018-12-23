@@ -28,6 +28,7 @@ class Login extends PureComponent {
         </Helmet>
         <div>Login</div>
         <button
+          type="submit"
           onClick={evt => {
             if (evt !== undefined && evt.preventDefault) evt.preventDefault();
             setAuthority('admins');
@@ -38,6 +39,7 @@ class Login extends PureComponent {
           登录
         </button>
         <button
+          type="submit"
           onClick={evt => {
             if (evt !== undefined && evt.preventDefault) evt.preventDefault();
             dispatch(push('/'));

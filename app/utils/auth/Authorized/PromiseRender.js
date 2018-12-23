@@ -58,7 +58,6 @@ class PromiseRender extends PureComponent {
           textAlign: 'center',
         }}
       >
-        {/* <Spin size="large" /> */}
         Spin...
       </div>
     );

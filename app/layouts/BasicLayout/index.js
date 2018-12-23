@@ -16,6 +16,7 @@ class BasicLayout extends PureComponent {
   componentDidMount() {
     console.log('BasicLayout Mounted!');
   }
+
   componentDidUpdate() {
     console.log('BasicLayout Updated!');
   }
@@ -40,6 +41,7 @@ class BasicLayout extends PureComponent {
             setAuthority('guest');
             dispatch(push('/auth/login'));
           }}
+          type="submit"
         >
           退出登录
         </button>
@@ -53,9 +55,12 @@ BasicLayout.propTypes = {
   dispatch: PropTypes.func,
 };
 
-const mapStateToProps = createSelector(makeSelectBasic(), basic => ({
-  basic,
-}));
+const mapStateToProps = createSelector(
+  makeSelectBasic(),
+  basic => ({
+    basic,
+  }),
+);
 
 const withConnect = connect(mapStateToProps);
 

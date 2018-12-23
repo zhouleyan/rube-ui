@@ -58,8 +58,12 @@ class Room extends PureComponent {
     return (
       <div>
         Component: {component}, Name: {name}:
-        <button onClick={handleCpnChange}>OK</button>
-        <button onClick={ev => this.handleMemoized(ev)}>Memoize</button>
+        <button type="button" onClick={handleCpnChange}>
+          OK
+        </button>
+        <button type="button" onClick={ev => this.handleMemoized(ev)}>
+          Memoize
+        </button>
       </div>
     );
   }
