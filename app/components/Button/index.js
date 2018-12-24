@@ -3,8 +3,13 @@ import * as React from 'react';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class Button extends React.PureComponent {
+  state = {
+    a: '123',
+  };
+
   render() {
-    return <div className="rube-button">Button</div>;
+    const { a } = this.state;
+    return <div className="rube-button">{a}</div>;
   }
 }
 

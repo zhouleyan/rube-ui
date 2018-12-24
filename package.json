@@ -1,9 +1,9 @@
 {
   "name": "rube-ui",
-  "version": "3.6.11",
+  "version": "3.6.12",
   "description": "rube-ui",
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "esm/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:zhouleyan/rube-ui.git"
@@ -46,11 +46,13 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "compile": "cross-env NODE_ENV=production npx gulp",
+    "compile:babel": "cross-env NODE_ENV=production npx babel --config-file ./internals/babel/babel.config.js ./app/components --out-dir ./esm --ignore *.test.js",
     "release": "bash ./internals/scripts/release/publish.sh"
   },
   "files": [
     "lib",
     "es",
+    "esm",
     "internals/scripts/npmcheckversion.js"
   ],
   "lint-staged": {
@@ -66,6 +68,7 @@
     },
     "ignore": [
       "es/**/*.js",
+      "esm/**/*.js",
       "lib/**/*.js"
     ]
   },
@@ -75,10 +78,14 @@
   },
   "sideEffects": [
     "es/**/style/*",
+    "esm/**/style/*",
     "lib/**/style/*",
-    "app/components/**/style/*"
+    "app/components/**/style/*",
+    "*.less"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@babel/runtime": "^7.2.0"
+  },
   "peerDependencies": {
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0"
@@ -86,11 +93,21 @@
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
-    "@babel/plugin-proposal-class-properties": "7.2.3",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-decorators": "^7.2.3",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
     "@babel/plugin-syntax-dynamic-import": "7.2.0",
+    "@babel/plugin-transform-member-expression-literals": "^7.2.0",
     "@babel/plugin-transform-modules-commonjs": "7.2.0",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/plugin-transform-property-literals": "^7.2.0",
     "@babel/plugin-transform-react-constant-elements": "7.2.0",
     "@babel/plugin-transform-react-inline-elements": "7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/plugin-transform-spread": "^7.2.2",
+    "@babel/plugin-transform-template-literals": "^7.2.0",
     "@babel/polyfill": "7.2.3",
     "@babel/preset-env": "7.2.3",
     "@babel/preset-react": "7.0.0",
@@ -104,8 +121,10 @@
     "babel-plugin-dynamic-import-node": "2.2.0",
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-react-intl": "3.0.1",
+    "babel-plugin-react-remove-properties": "^0.2.5",
     "babel-plugin-react-transform": "3.0.0",
     "babel-plugin-styled-components": "1.10.0",
+    "babel-plugin-transform-dev-warning": "^0.1.1",
     "babel-plugin-transform-react-remove-prop-types": "0.4.21",
     "chalk": "2.4.1",
     "circular-dependency-plugin": "5.0.2",

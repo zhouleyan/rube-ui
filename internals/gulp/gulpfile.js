@@ -29,7 +29,7 @@ function babelify(js, modules) {
     /* eslint-disable no-param-reassign */
     through2.obj(function z(file, encoding, next) {
       this.push(file.clone());
-      if (file.path.match(/\/style\/index.js/)) {
+      if (file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
         const content = file.contents.toString(encoding);
         file.contents = Buffer.from(
           content
@@ -57,7 +57,6 @@ function babelify(js, modules) {
 }
 
 module.exports = function compile(modules) {
-  console.log(modules);
   rimraf.sync(modules !== false ? libDir : esDir);
   // handle less
   const less = gulp

@@ -5,7 +5,6 @@ module.exports = {
   ident: 'postcss',
   plugins: [
     rucksack(),
-    require('postcss-flexbugs-fixes'), // eslint-disable-line global-require
     autoprefixer({
       browsers: [
         'last 2 versions',
