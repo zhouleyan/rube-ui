@@ -1,9 +1,9 @@
 {
   "name": "rube-ui",
-  "version": "3.6.12",
+  "version": "3.6.13",
   "description": "rube-ui",
   "main": "lib/index.js",
-  "module": "esm/index.js",
+  "module": "es/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:zhouleyan/rube-ui.git"
@@ -46,13 +46,11 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "compile": "cross-env NODE_ENV=production npx gulp",
-    "compile:babel": "cross-env NODE_ENV=production npx babel --config-file ./internals/babel/babel.config.js ./app/components --out-dir ./esm --ignore *.test.js",
     "release": "bash ./internals/scripts/release/publish.sh"
   },
   "files": [
     "lib",
     "es",
-    "esm",
     "internals/scripts/npmcheckversion.js"
   ],
   "lint-staged": {
@@ -68,7 +66,6 @@
     },
     "ignore": [
       "es/**/*.js",
-      "esm/**/*.js",
       "lib/**/*.js"
     ]
   },
@@ -78,7 +75,6 @@
   },
   "sideEffects": [
     "es/**/style/*",
-    "esm/**/style/*",
     "lib/**/style/*",
     "app/components/**/style/*",
     "*.less"

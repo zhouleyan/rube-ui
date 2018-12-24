@@ -1,16 +1,43 @@
-import * as React from 'react';
-// import PropTypes from 'prop-types';
+/**
+ *
+ * Button.js
+ *
+ * A common button, if you pass it a prop "route" it'll render a link to a react-router route
+ * otherwise it'll render a link with an onclick
+ */
 
-/* eslint-disable react/prefer-stateless-function */
-export default class Button extends React.PureComponent {
-  state = {
-    a: '123',
-  };
+import React, { Children } from 'react';
+import PropTypes from 'prop-types';
 
-  render() {
-    const { a } = this.state;
-    return <div className="rube-button">{a}</div>;
+import A from './A';
+import StyledButton from './StyledButton';
+import Wrapper from './Wrapper';
+
+function Button(props) {
+  // Render an anchor tag
+  let button = (
+    <A href={props.href} onClick={props.onClick}>
+      {Children.toArray(props.children)}
+    </A>
+  );
+
+  // If the Button has a handleRoute prop, we want to render a button
+  if (props.handleRoute) {
+    button = (
+      <StyledButton onClick={props.handleRoute}>
+        {Children.toArray(props.children)}
+      </StyledButton>
+    );
   }
+
+  return <Wrapper>{button}</Wrapper>;
 }
 
-Button.propTypes = {};
+Button.propTypes = {
+  handleRoute: PropTypes.func,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+};
+
+export default Button;

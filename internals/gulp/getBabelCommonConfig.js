@@ -2,24 +2,23 @@ const { resolve } = require('./utils/projectHelper');
 
 module.exports = function getBabelCommonConfig(modules) {
   const plugins = [
-    // Ensure that reserved words are quoted in property access
+    resolve('babel-plugin-styled-components'),
+    resolve('@babel/plugin-syntax-dynamic-import'),
     resolve('@babel/plugin-transform-member-expression-literals'),
-    // Replace Object.assign with an inline helper
-    resolve('@babel/plugin-transform-object-assign'),
-    // Ensure that reserved words are quoted in object property keys
     resolve('@babel/plugin-transform-property-literals'),
+    resolve('@babel/plugin-transform-object-assign'),
     [
       // Externalise references to helpers and builtins, automatically polyfilling your code without polluting globals
       resolve('@babel/plugin-transform-runtime'),
       {
-        helpers: false,
+        helpers: true,
       },
     ],
     resolve('@babel/plugin-transform-spread'),
     resolve('@babel/plugin-transform-template-literals'),
-    resolve('@babel/plugin-proposal-class-properties'),
     resolve('@babel/plugin-proposal-export-default-from'),
     resolve('@babel/plugin-proposal-export-namespace-from'),
+    resolve('@babel/plugin-proposal-class-properties'),
     resolve('@babel/plugin-proposal-object-rest-spread'),
     [
       resolve('@babel/plugin-proposal-decorators'),
@@ -30,7 +29,6 @@ module.exports = function getBabelCommonConfig(modules) {
   ];
   return {
     presets: [
-      resolve('@babel/preset-react'),
       [
         resolve('@babel/preset-env'),
         {
@@ -47,7 +45,32 @@ module.exports = function getBabelCommonConfig(modules) {
           },
         },
       ],
+      resolve('@babel/preset-react'),
     ],
     plugins,
+    ignore: [/@babel[\\|/]runtime/],
+    env: {
+      production: {
+        plugins: [
+          resolve('babel-plugin-lodash'),
+          resolve('@babel/plugin-transform-react-inline-elements'),
+          resolve('@babel/plugin-transform-react-constant-elements'),
+          resolve('babel-plugin-transform-dev-warning'),
+          [
+            resolve('babel-plugin-react-remove-properties'),
+            { properties: ['data-rube-test'] },
+          ],
+          [
+            resolve('babel-plugin-transform-react-remove-prop-types'),
+            {
+              mode: 'unsafe-wrap',
+            },
+          ],
+        ],
+        // It's most likely a babel bug.
+        // We are using this ignore option in the CLI command but that has no effect.
+        ignore: ['**/*.test.js'],
+      },
+    },
   };
 };

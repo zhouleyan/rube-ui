@@ -1,67 +1,39 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+import _jsx from "@babel/runtime/helpers/jsx";
 
-var REACT_ELEMENT_TYPE;
+/**
+ *
+ * Button.js
+ *
+ * A common button, if you pass it a prop "route" it'll render a link to a react-router route
+ * otherwise it'll render a link with an onclick
+ */
+import React, { Children } from 'react';
+import PropTypes from 'prop-types';
+import A from './A';
+import StyledButton from './StyledButton';
+import Wrapper from './Wrapper';
 
-function _jsx(type, props, key, children) { if (!REACT_ELEMENT_TYPE) { REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol["for"] && Symbol["for"]("react.element") || 0xeac7; } var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = { children: void 0 }; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = new Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }
+function Button(props) {
+  // Render an anchor tag
+  var button = _jsx(A, {
+    href: props.href,
+    onClick: props.onClick
+  }, void 0, Children.toArray(props.children)); // If the Button has a handleRoute prop, we want to render a button
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-import * as React from 'react'; // import PropTypes from 'prop-types';
-
-/* eslint-disable react/prefer-stateless-function */
-
-var Button =
-/*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(Button, _React$PureComponent);
-
-  function Button() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, Button);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Button)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      a: '123'
-    });
-
-    return _this;
+  if (props.handleRoute) {
+    button = _jsx(StyledButton, {
+      onClick: props.handleRoute
+    }, void 0, Children.toArray(props.children));
   }
 
-  _createClass(Button, [{
-    key: "render",
-    value: function render() {
-      var a = this.state.a;
-      return _jsx("div", {
-        className: "rube-button"
-      }, void 0, a);
-    }
-  }]);
+  return _jsx(Wrapper, {}, void 0, button);
+}
 
-  return Button;
-}(React.PureComponent);
-
-export { Button as default };
+process.env.NODE_ENV !== "production" ? Button.propTypes = {
+  handleRoute: PropTypes.func,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired
+} : void 0;
+export default Button;

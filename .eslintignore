@@ -4,7 +4,6 @@ internals/generators/
 internals/scripts/
 es/
 lib/
-b-es/
 package-lock.json
 yarn.lock
 package.json
