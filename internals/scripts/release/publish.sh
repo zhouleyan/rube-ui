@@ -9,7 +9,6 @@ npm install --registry=https://registry.npmjs.org
 
 # build
 npm run compile
-npm run compile:babel
 
 # ADD commit
 git add -A
