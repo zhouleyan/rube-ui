@@ -36,5 +36,4 @@ function (_PureComponent) {
   return Validator;
 }(PureComponent);
 
-process.env.NODE_ENV !== "production" ? Validator.propTypes = {} : void 0;
 export default Validator;

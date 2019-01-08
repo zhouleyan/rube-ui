@@ -1,0 +1,116 @@
+@import '../../style/mixins/index.less';
+
+@col-prefix-cls: ~'@{rube-prefix}-col';
+
+.make-row(@gutter: @grid-gutter-width) {
+  position: relative;
+  // margin-left: (@gutter / -2);
+  // margin-right: (@gutter / -2);
+  height: auto;
+  .clearfix;
+}
+
+.make-grid-columns() {
+  .col(@index) {
+    @item: ~'.@{col-prefix-cls}-@{index}, .@{col-prefix-cls}-xs-@{index}, .@{col-prefix-cls}-sm-@{index}, .@{col-prefix-cls}-md-@{index}, .@{col-prefix-cls}-lg-@{index}';
+    .col((@index + 1), @item);
+  }
+
+  .col(@index, @list) when (@index =< @grid-columns) {
+    @item: ~'.@{col-prefix-cls}-@{index}, .@{col-prefix-cls}-xs-@{index}, .@{col-prefix-cls}-sm-@{index}, .@{col-prefix-cls}-md-@{index}, .@{col-prefix-cls}-lg-@{index}';
+    .col((@index + 1), ~'@{list}, @{item}');
+  }
+
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      position: relative;
+      // Prevent columns from collapsing when empty
+      min-height: 1px;
+      // padding-left: (@grid-gutter-width / 2);
+      // padding-right: (@grid-gutter-width / 2);
+    }
+  }
+  .col(1);
+}
+
+.float-grid-columns(@class) {
+  .col(@index) {
+    // initial
+    @item: ~'.@{col-prefix-cls}@{class}-@{index}';
+    .col((@index + 1), @item);
+  }
+
+  .col(@index, @list) when (@index <= @grid-columns) {
+    @item: ~'.@{col-prefix-cls}@{class}-@{index}';
+    .col((@index + 1), ~'@{list}, @{item}');
+  }
+
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      float: left;
+      flex: 0 0 auto;
+    }
+  }
+  .col(1);
+}
+
+.loop-grid-columns(@index, @class) when (@index > 0) {
+  .@{col-prefix-cls}@{class}-@{index} {
+    display: block;
+    box-sizing: border-box;
+    width: percentage((@index / @grid-columns));
+  }
+
+  .@{col-prefix-cls}@{class}-push-@{index} {
+    left: percentage((@index / @grid-columns));
+  }
+
+  .@{col-prefix-cls}@{class}-pull-@{index} {
+    right: percentage((@index / @grid-columns));
+  }
+
+  .@{col-prefix-cls}@{class}-offset-@{index} {
+    margin-left: percentage((@index / @grid-columns));
+  }
+
+  .@{col-prefix-cls}@{class}-order-@{index} {
+    order: @index;
+  }
+
+  .loop-grid-columns((@index - 1), @class);
+}
+
+.loop-grid-columns(@index, @class) when (@index = 0) {
+  .@{col-prefix-cls}@{class}-@{index} {
+    display: none;
+  }
+
+  .@{col-prefix-cls}-push-@{index} {
+    left: auto;
+  }
+
+  .@{col-prefix-cls}-pull-@{index} {
+    right: auto;
+  }
+
+  .@{col-prefix-cls}@{class}-push-@{index} {
+    left: auto;
+  }
+
+  .@{col-prefix-cls}@{class}-pull-@{index} {
+    right: auto;
+  }
+
+  .@{col-prefix-cls}@{class}-offset-@{index} {
+    margin-left: 0;
+  }
+
+  .@{col-prefix-cls}@{class}-order-@{index} {
+    order: 0;
+  }
+}
+
+.make-grid(@class: ~'') {
+  .float-grid-columns(@class);
+  .loop-grid-columns(@grid-columns, @class);
+}

@@ -35,5 +35,4 @@ function (_PureComponent) {
   return Scroll;
 }(PureComponent);
 
-process.env.NODE_ENV !== "production" ? Scroll.propTypes = {} : void 0;
 export default Scroll;

@@ -25,6 +25,7 @@ function babelify(js, modules) {
       require.resolve('babel-plugin-add-module-exports'),
     );
   }
+
   let stream = js.pipe(babel(babelConfig)).pipe(
     /* eslint-disable no-param-reassign */
     through2.obj(function z(file, encoding, next) {
@@ -33,7 +34,8 @@ function babelify(js, modules) {
         const content = file.contents.toString(encoding);
         file.contents = Buffer.from(
           content
-            .replace(/\/style\/?'/g, '/style/css')
+            .replace(/\/style\/?'/g, "/style/css'")
+            .replace(/\/style\/?"/g, 'style/css"')
             .replace(/\.less/g, '.css'),
         );
         file.path = file.path.replace(/index\.js/, 'css.js');

@@ -1,0 +1,81 @@
+@import '../../style/themes/default.less';
+
+@layout-prefix-cls: ~'@{rube-prefix}-layout';
+.@{layout-prefix-cls} {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  background: @layout-body-background;
+  /* fix firefox can't set height smaller than content on flex item */
+  min-height: 0;
+
+  &&-has-sider {
+    flex-direction: row;
+    > .@{layout-prefix-cls},
+    > .@{layout-prefix-cls}-content {
+      overflow-x: hidden;
+    }
+  }
+
+  &-header,
+  &-footer {
+    flex: 0 0 auto;
+  }
+
+  &-header {
+    background: @layout-header-background;
+    height: @layout-header-height;
+    line-height: @layout-header-height;
+  }
+
+  &-content {
+    flex: auto;
+    /* fix firefox can't set height smaller than content on flex item */
+    min-height: 0;
+  }
+
+  &-footer {
+    background: @layout-footer-background;
+    color: @text-color;
+    font-size: @font-size-base;
+  }
+
+  &-sider {
+    position: relative;
+    background: @layout-sider-background;
+    min-width: 0;
+    /* fix firefox can't set height smaller than content on flex item */
+    min-height: 0;
+
+    &-children {
+      height: 100%;
+      // Hack for fixing margin collaspe bug
+      padding-top: 0.1px;
+      margin-top: -0.1px;
+    }
+
+    &-has-trigger {
+      // @layout-trigger-height
+      padding-bottom: @layout-trigger-height;
+    }
+
+    &-right {
+      order: 1;
+    }
+
+    &-trigger {
+      position: fixed;
+      text-align: center;
+      bottom: 0;
+      cursor: pointer;
+      height: @layout-trigger-height;
+      line-height: @layout-trigger-height;
+      color: @layout-trigger-color;
+      background: @layout-trigger-background;
+      z-index: 1;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

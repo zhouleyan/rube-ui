@@ -5,6 +5,9 @@ import Login from 'pages/Auth/Login/Loadable';
 /* Basic */
 import BasicLayout from 'layouts/BasicLayout/Loadable';
 
+/* Playground */
+import Playground from 'layouts/Playground/Loadable';
+
 /**
  * < route 对象属性 >
  * path: 路径 required
@@ -40,6 +43,12 @@ export default [
   {
     path: '/',
     component: BasicLayout,
+    routes: [],
+  },
+  // Playground
+  {
+    path: '/playground',
+    component: Playground,
     routes: [],
   },
 ];

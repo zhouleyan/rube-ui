@@ -6,9 +6,9 @@ function compileToLib(done) {
   done();
 }
 
-function compileToEs(done) {
+function compileToES(done) {
   compile();
   done();
 }
 
-exports.default = series(compileToEs, compileToLib);
+exports.default = series(compileToES, compileToLib);

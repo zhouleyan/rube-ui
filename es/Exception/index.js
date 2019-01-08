@@ -7,7 +7,4 @@ var Exception = function Exception(_ref) {
   return _jsx("div", {}, void 0, "Exception: ", type);
 };
 
-process.env.NODE_ENV !== "production" ? Exception.propTypes = {
-  type: PropTypes.string
-} : void 0;
 export default Exception;

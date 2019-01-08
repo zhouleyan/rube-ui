@@ -30,10 +30,4 @@ function Button(props) {
   return _jsx(Wrapper, {}, void 0, button);
 }
 
-process.env.NODE_ENV !== "production" ? Button.propTypes = {
-  handleRoute: PropTypes.func,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired
-} : void 0;
 export default Button;

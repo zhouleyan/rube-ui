@@ -33,5 +33,4 @@ function (_PureComponent) {
   return Input;
 }(PureComponent);
 
-process.env.NODE_ENV !== "production" ? Input.propTypes = {} : void 0;
 export default Input;

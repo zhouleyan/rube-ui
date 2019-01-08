@@ -33,5 +33,4 @@ function (_PureComponent) {
   return Select;
 }(PureComponent);
 
-process.env.NODE_ENV !== "production" ? Select.propTypes = {} : void 0;
 export default Select;

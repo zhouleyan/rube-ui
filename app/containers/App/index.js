@@ -22,6 +22,7 @@ function App({ routeData }) {
   const [
     { component: AuthLayout, routes: authRoutes },
     { component: BasicLayout, routes: basicRoutes },
+    { component: PlaygroundLayout, routes: playgroundRoutes },
   ] = routeData;
   return (
     <React.Fragment>
@@ -33,6 +34,12 @@ function App({ routeData }) {
           path="/auth"
           render={props => <AuthLayout {...props} routes={authRoutes} />}
         />
+        <Route
+          path="/playground"
+          render={props => (
+            <PlaygroundLayout {...props} routes={playgroundRoutes} />
+          )}
+        />
         <AuthorizedRoute
           path="/"
           render={props => <BasicLayout {...props} routes={basicRoutes} />}
@@ -42,6 +49,7 @@ function App({ routeData }) {
             search: getQueryPath('', { redirect: window.location.href }),
           }}
         />
+
         {/* TODO: 将NotFoundPage移至BasicLayout内实现 */}
         {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
