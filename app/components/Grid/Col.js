@@ -81,6 +81,11 @@ const objectOrNumber = PropTypes.oneOfType([
 
 Col.propTypes = {
   prefixCls: PropTypes.string,
+  span: PropTypes.number,
+  order: PropTypes.number,
+  offset: PropTypes.number,
+  push: PropTypes.number,
+  pull: PropTypes.number,
   className: PropTypes.string,
   children: PropTypes.node,
   xs: objectOrNumber,
