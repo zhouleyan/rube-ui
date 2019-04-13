@@ -13,7 +13,7 @@
   left: 0px;
   width: 100%;
   height: 468px;
-  background: @primary-color;
+  background: @info-color;
   user-select: none;
   z-index: -1;
 }
@@ -23,7 +23,8 @@
 .active(@color: @outline-color) {
   border-right-width: @border-width-base !important;
   outline: 0;
-  box-shadow: @input-outline-offset @outline-blur-size @outline-width @border-color-base;
+  box-shadow: @input-outline-offset @outline-blur-size @outline-width
+    fade(@info-color, 9%);
 }
 
 .login {
@@ -40,7 +41,7 @@
   &-form {
     padding: 24px;
     background: #fff;
-    border-radius: 5px;
+    border-radius: @border-radius-base;
     box-shadow: 0 4px 8px 0 rgba(36, 46, 66, 0.06);
     &-item {
       margin-top: 20px;
@@ -57,7 +58,7 @@
         padding: @input-padding-vertical-base @input-padding-horizontal-base;
         width: 100%;
         border: @border-width-base @border-style-base @input-border-color;
-        border-radius: @border-radius-base;
+        border-radius: @border-radius-sm;
         font-size: @font-size-base;
         font-weight: @input-font-weight;
         font-variant: tabular-nums;
@@ -67,9 +68,31 @@
         transition: all 0.2s ease-in-out;
         .placeholder();
         &:focus {
-          .active()
+          .active();
         }
       }
+    }
+    .submit {
+      text-align: right;
+    }
+    button[type='submit'] {
+      position: relative;
+      margin-top: 32px;
+      margin-bottom: 8px;
+      border-radius: @border-radius-sm;
+      width: 120px;
+      height: 36px;
+      color: #fff;
+      box-shadow: 0 8px 16px fade(@primary-color, 15%);
+      background-color: @primary-color;
+      border: solid 1px @primary-color;
+      text-shadow: 0 2px 4px rgba(35, 45, 65, 0.2);
+      font-size: 12px;
+      line-height: 22px;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease-in-out;
     }
   }
   &-header {

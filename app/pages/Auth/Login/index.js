@@ -23,6 +23,11 @@ class Login extends PureComponent {
     console.log('Login Updated!');
   }
 
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log('ok');
+  };
+
   render() {
     // const { dispatch } = this.props;
     return (
@@ -42,7 +47,7 @@ class Login extends PureComponent {
               <p>欢迎使用DFM PaaS</p>
               <div className="login-header-mask">登录</div>
             </div>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <div className="login-form-item">
                 <label htmlFor="email">邮箱账户：</label>
                 <input
@@ -50,22 +55,24 @@ class Login extends PureComponent {
                   id="email"
                   name="email"
                   placeholder="demo@demo.com"
-                  required
                 />
               </div>
               <div className="login-form-item">
                 <label htmlFor="password">密码：</label>
                 <div style={{ position: 'relative' }}>
                   <input
-                    type="text"
+                    type="password"
                     id="password"
                     name="password"
                     placeholder="password"
-                    required
                   />
                 </div>
               </div>
-              <div className="submit" />
+              <div className="submit">
+                <button type="submit">
+                  <span>登录</span>
+                </button>
+              </div>
             </form>
             {/* <button
               type="submit"

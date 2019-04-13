@@ -1,5 +1,3 @@
-/* eslint-disable react/no-multi-comp */
-
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -56,6 +54,7 @@ class BasicLayout extends React.PureComponent {
 }
 
 function generator({ suffixCls, tagName }) {
+  /* eslint-disable react/no-multi-comp */
   return BasicComponent =>
     class Adapter extends React.PureComponent {
       static Header;
@@ -87,6 +86,7 @@ function generator({ suffixCls, tagName }) {
         return <ConfigConsumer>{this.renderComponent}</ConfigConsumer>;
       }
     };
+  /* eslint-enable react/no-multi-comp */
 }
 
 function Basic(props) {

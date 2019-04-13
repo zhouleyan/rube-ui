@@ -1,7 +1,7 @@
-import React, { Children, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import { ConfigConsumer } from '../ConfigProvider';
 import RowContext from './RowContext';
 
 let enquire;
@@ -36,10 +36,26 @@ class Row extends PureComponent {
     Object.keys(responsiveMap).map(screen =>
       enquire.register(responsiveMap[screen], {
         match: () => {
-          this.setScreens(screen, true);
+          if (typeof this.props.gutter !== 'object') {
+            return;
+          }
+          this.setState(prevState => ({
+            screens: {
+              ...prevState.screens,
+              [screen]: true,
+            },
+          }));
         },
         unmatch: () => {
-          this.setScreens(screen, false);
+          if (typeof this.props.gutter !== 'object') {
+            return;
+          }
+          this.setState(prevState => ({
+            screens: {
+              ...prevState.screens,
+              [screen]: false,
+            },
+          }));
         },
         destroy() {},
       }),
@@ -51,17 +67,6 @@ class Row extends PureComponent {
       enquire.unregister(responsiveMap[screen]),
     );
   }
-
-  setScreens = (screen, isMatch) => {
-    if (typeof this.props.gutter === 'object') {
-      this.setState(prevState => ({
-        screens: {
-          ...prevState.screens,
-          [screen]: isMatch,
-        },
-      }));
-    }
-  };
 
   getGutter = gutter => {
     if (typeof gutter === 'object') {
@@ -78,9 +83,9 @@ class Row extends PureComponent {
     return gutter;
   };
 
-  render() {
+  renderRow = ({ getPrefixCls }) => {
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       type,
       justify,
       align,
@@ -90,6 +95,7 @@ class Row extends PureComponent {
       children,
       ...others
     } = this.props;
+    const prefixCls = getPrefixCls('row', customizePrefixCls);
     const gutter = this.getGutter(rawGutter);
     const classes = classNames(className, {
       [prefixCls]: !type,
@@ -107,13 +113,19 @@ class Row extends PureComponent {
           }
         : style;
     /* eslint-enable */
+    const otherProps = { ...others };
+    delete otherProps.gutter;
     return (
       <RowContext.Provider value={{ gutter }}>
-        <div className={classes} style={rowStyle} {...others}>
-          {Children.toArray(children)}
+        <div className={classes} style={rowStyle} {...otherProps}>
+          {children}
         </div>
       </RowContext.Provider>
     );
+  };
+
+  render() {
+    return <ConfigConsumer>{this.renderRow}</ConfigConsumer>;
   }
 }
 
@@ -135,7 +147,6 @@ Row.propTypes = {
 };
 
 Row.defaultProps = {
-  prefixCls: 'rube-row',
   gutter: 0,
 };
 
