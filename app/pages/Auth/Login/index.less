@@ -1,4 +1,5 @@
-@import '../../../components/style/themes/default';
+@import '../../../components/style/themes/default.less';
+@import '../../../components/style/mixins/index.less';
 
 .logo {
   position: absolute;
@@ -15,6 +16,14 @@
   background: @primary-color;
   user-select: none;
   z-index: -1;
+}
+
+// Input status
+// == when focus or actived
+.active(@color: @outline-color) {
+  border-right-width: @border-width-base !important;
+  outline: 0;
+  box-shadow: @input-outline-offset @outline-blur-size @outline-width @border-color-base;
 }
 
 .login {
@@ -37,10 +46,11 @@
       margin-top: 20px;
       & label {
         display: block;
-        margin-bottom: 4px;
-        font-size: 12px;
-        line-height: 20px;
-        // color: @text-color-secondary;
+        margin-bottom: 6px;
+        font-size: 14px;
+        line-height: 22px;
+        color: fade(@text-color, 65%);
+        font-weight: @input-font-weight;
       }
       & input {
         display: inline-block;
@@ -52,11 +62,12 @@
         font-weight: @input-font-weight;
         font-variant: tabular-nums;
         line-height: @line-height-base;
-        color: @text-color;
+        color: fade(@text-color, 65%);
         outline: none;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        .placeholder();
         &:focus {
-          border-color: @info-color;
+          .active()
         }
       }
     }
@@ -72,7 +83,7 @@
       font-size: 40px;
       font-weight: normal;
       line-height: 56px;
-      // color: @text-color-secondary;
+      color: fade(@text-color, 85%);
       z-index: 99;
     }
     & > p {
@@ -80,7 +91,7 @@
       margin-top: -5px;
       font-size: 14px;
       line-height: 20px;
-      color: fade(@text-color, 50%);
+      color: fade(@text-color, 65%);
       z-index: 99;
     }
     &-mask {
@@ -90,9 +101,7 @@
       height: 100px;
       font-size: 100px;
       line-height: 100px;
-      color: fade(@text-color, 5%);
-      // background: url('./login.svg') no-repeat;
-      // background-size: contain;
+      color: fade(@text-color, 4%);
     }
   }
 }

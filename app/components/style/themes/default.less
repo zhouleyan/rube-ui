@@ -3,6 +3,17 @@
 
 // --------- Colors ---------
 @primary-color: #f55864;
+// Info Color ---
+/* Type              Light    Dark
+ * Title             85%      100%
+ * Primary text      65%      85%
+ * Secondary text    45%      65%
+ * Disable           25%      45%
+ * Border            15%      25%
+ * Divider            9%      15%
+ * Background         4%       9%
+ * Table header       2%       4%
+ */
 @info-color: #3e3d53;
 
 // Color used by default to control hover and active backgrounds and for
@@ -25,7 +36,6 @@
   monospace;
 
 @text-color: @info-color;
-@text-color-secondary: #4a5974;
 // @text-color-warning: @gold-7;
 // @text-color-danger: @red-7;
 // @text-color-inverse: @white;
@@ -61,7 +71,7 @@
 // Outline
 @outline-blur-size: 0;
 @outline-width: 2px;
-@outline-color: @primary-color;
+@outline-color: @info-color;
 
 // Input
 // ---
@@ -71,7 +81,9 @@
 @input-color: @text-color;
 @input-bg: #fff;
 @input-border-color: @border-color-base;
-@input-font-weight: 600;
+@input-font-weight: 500;
+@input-placeholder-color: fade(@text-color, 65%);
+@input-outline-offset: 0 0;
 
 @background-color-light: hsv(
   0,

@@ -66,6 +66,7 @@ if (module.hot) {
 
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {
+  /* eslint-disable */
   new Promise(resolve => {
     resolve(import('intl'));
   })
@@ -74,6 +75,7 @@ if (!window.Intl) {
     .catch(err => {
       throw err;
     });
+  /* eslint-enable */
 } else {
   render(translationMessages);
 }
