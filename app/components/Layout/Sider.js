@@ -1,8 +1,10 @@
-import React, { Children, PureComponent, createContext } from 'react';
+import React, { PureComponent, createContext } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import omit from 'omit.js';
 import isNumeric from '../_utils/isNumeric';
+import { ConfigConsumer } from '../ConfigProvider';
+import { LayoutContext } from './Layout';
 
 if (typeof window !== 'undefined') {
   const matchMediaPolyfill = mediaQuery => ({
@@ -23,29 +25,32 @@ const dimensionMap = {
   xxl: '1600px',
 };
 
-export const SiderContext = createContext({
-  siderCollapsed: false,
-  collapsedWidth: 80,
-});
+export const SiderContext = createContext({});
 
-class Sider extends PureComponent {
+const generateID = (() => {
+  let i = 0;
+  return (prefix = '') => {
+    i += 1;
+    return `${prefix}${i}`;
+  };
+})();
+
+class InternalSider extends PureComponent {
   static defaultProps = {
-    // 类前缀
-    prefixCls: 'rube-layout-sider',
-    // 侧栏是否收起
-    isCollapsed: true,
-    // 宽度
-    width: 200,
     // 是否可收起
     collapsible: false,
-    // 收缩宽度
-    collapsedWidth: 80,
-    // 外部style
-    style: {},
     // 默认是否收起
     defaultCollapsed: false,
     // 是否改变触发器箭头方向
     reverseArrow: false,
+    // 宽度
+    width: 200,
+    // 收缩宽度
+    collapsedWidth: 80,
+    // 外部style
+    style: {},
+    // 主题
+    theme: 'dark',
   };
 
   // 根据新的props更新state
@@ -61,8 +66,12 @@ class Sider extends PureComponent {
   // mediaQueryList
   mql;
 
+  // uniqueID
+  uniqueID;
+
   constructor(props) {
     super(props);
+    this.uniqueID = generateID('rube-sider-');
     let matchMedia;
     if (typeof window !== 'undefined') {
       ({ matchMedia } = window);
@@ -86,11 +95,19 @@ class Sider extends PureComponent {
       this.mql.addListener(this.responsiveHandler);
       this.responsiveHandler(this.mql);
     }
+
+    if (this.props.siderHook) {
+      this.props.siderHook.addSider(this.uniqueID);
+    }
   }
 
   componentWillUnmount() {
     if (this.mql) {
       this.mql.removeListener(this.responsiveHandler);
+    }
+
+    if (this.props.siderHook) {
+      this.props.siderHook.removeSider(this.uniqueId);
     }
   }
 
@@ -121,81 +138,120 @@ class Sider extends PureComponent {
     this.setCollapsed(collapsed, 'clickTrigger');
   };
 
-  render() {
+  renderSider = ({ getPrefixCls }) => {
     const {
-      prefixCls,
+      prefixCls: customizePrefixCls,
       className,
-      isCollapsed,
-      width,
+      theme,
       collapsible,
-      collapsedWidth,
       reverseArrow,
       trigger,
       style,
-      children,
-    } = this.props;
-    const { collapsed } = this.state;
-    const { Provider } = SiderContext;
-    const contextValue = {
-      siderCollapsed: collapsed,
+      width,
       collapsedWidth,
-    };
-    const rawWidth = collapsed ? collapsedWidth : width;
+      ...others
+    } = this.props;
+    const prefixCls = getPrefixCls('layout-sider', customizePrefixCls);
+    const divProps = omit(others, [
+      'collapsed',
+      'defaultCollapsed',
+      'onCollapse',
+      'breakpoint',
+      'onBreakpoint',
+      'siderHook',
+    ]);
+
+    const rawWidth = this.state.collapsed ? collapsedWidth : width;
     // use "px" as fallback unit for width
     const siderWidth = isNumeric(rawWidth) ? `${rawWidth}px` : String(rawWidth);
 
-    const classes = classNames(className, prefixCls, {
-      [`${prefixCls}-zero-width`]: !siderWidth,
-      [`${prefixCls}-collapsed`]: isCollapsed,
-    });
+    const zeroWidthTrigger =
+      parseFloat(String(collapsedWidth || 0)) === 0 ? (
+        <span
+          role="button"
+          tabIndex="0"
+          onClick={this.toggle}
+          onKeyPress={this.toggle}
+          className={`${prefixCls}-zero-width-trigger ${prefixCls}-zero-width-trigger-${
+            reverseArrow ? 'right' : 'left'
+          }`}
+        >
+          ZERO
+        </span>
+      ) : null;
 
     const iconObj = {
       expanded: reverseArrow ? '>' : '<',
       collapsed: reverseArrow ? '<' : '>',
     };
-    const status = collapsed ? 'collapsed' : 'expanded';
-    const defaultTrigger = iconObj[status];
-    const triggerDOM =
-      trigger !== null ? (
-        <div
-          role="button"
-          tabIndex="0"
-          className={`${prefixCls}-trigger`}
-          style={{ width: siderWidth }}
-          onClick={this.toggle}
-          onKeyPress={this.toggle}
-        >
-          {trigger || defaultTrigger}
-        </div>
-      ) : null;
 
-    const wrapStyles = {
+    const status = this.state.collapsed ? 'collapsed' : 'expanded';
+    const defaultTrigger = iconObj[status];
+    /* eslint-disable indent */
+    const triggerDom =
+      trigger !== null
+        ? zeroWidthTrigger || (
+            <div
+              className={`${prefixCls}-trigger`}
+              role="button"
+              tabIndex="0"
+              onClick={this.toggle}
+              onKeyPress={this.toggle}
+              style={{ width: siderWidth }}
+            >
+              {trigger || defaultTrigger}
+            </div>
+          )
+        : null;
+    /* eslint-enable */
+    const divStyle = {
       ...style,
-      width: `${siderWidth}`,
-      minWidth: `${siderWidth}`,
-      maxWidth: `${siderWidth}`,
       flex: `0 0 ${siderWidth}`,
+      maxWidth: siderWidth, // Fix width transition bug in IE11
+      minWidth: siderWidth, // https://github.com/ant-design/ant-design/issues/6349
+      width: siderWidth,
     };
+
+    const siderCls = classNames(className, prefixCls, `${prefixCls}-${theme}`, {
+      [`${prefixCls}-collapsed`]: !!this.state.collapsed,
+      [`${prefixCls}-has-trigger`]:
+        collapsible && trigger !== null && !zeroWidthTrigger,
+      [`${prefixCls}-below`]: !!this.state.below,
+      [`${prefixCls}-zero-width`]: parseFloat(siderWidth) === 0,
+    });
     return (
-      <div className={classes} style={wrapStyles}>
-        <div className={`${prefixCls}-children`}>
-          <Provider value={contextValue}>{Children.toArray(children)}</Provider>
-        </div>
-        {collapsible ? triggerDOM : null}
-      </div>
+      <aside className={siderCls} {...divProps} style={divStyle}>
+        <div className={`${prefixCls}-children`}>{this.props.children}</div>
+        {collapsible || (this.state.below && zeroWidthTrigger)
+          ? triggerDom
+          : null}
+      </aside>
+    );
+  };
+
+  render() {
+    const { collapsed } = this.state;
+    const { collapsedWidth } = this.props;
+    return (
+      <SiderContext.Provider
+        value={{
+          siderCollapsed: collapsed,
+          collapsedWidth,
+        }}
+      >
+        <ConfigConsumer>{this.renderSider}</ConfigConsumer>
+      </SiderContext.Provider>
     );
   }
 }
 
-Sider.propTypes = {
+InternalSider.propTypes = {
   // 类前缀
   prefixCls: PropTypes.string,
   // 自定义样式类
   className: PropTypes.string,
   // 响应式触发断点
   breakpoint: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
-  // 侧栏是否收起
-  isCollapsed: PropTypes.bool,
   // 宽度
   width: PropTypes.number,
   // 是否可收起
@@ -210,6 +266,10 @@ Sider.propTypes = {
   reverseArrow: PropTypes.bool,
   // 折叠按钮
   trigger: PropTypes.node,
+  // 主题
+  theme: PropTypes.string,
+  // siderHook
+  siderHook: PropTypes.object,
   // 子元素/组件
   children: PropTypes.node,
   // 折叠按钮回调
@@ -218,6 +278,11 @@ Sider.propTypes = {
   onBreakpoint: PropTypes.func,
 };
 
-Sider.Context = SiderContext;
+// Sider
+const Sider = props => (
+  <LayoutContext.Consumer>
+    {context => <InternalSider {...context} {...props} />}
+  </LayoutContext.Consumer>
+);
 
 export default Sider;

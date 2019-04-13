@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from 'components/Layout';
-import Menu from 'components/Menu';
+// import Menu from 'components/Menu';
 import { Row, Col } from 'components/Grid';
 import 'components/Layout/style';
 import 'components/Grid/style';
@@ -13,11 +13,11 @@ class Playground extends Component {
 
   render() {
     const { Sider, Header, Footer, Content } = Layout;
-    const { Consumer } = Sider.Context;
+    // const { Consumer } = Sider.Context;
     return (
       <Layout>
         <Sider collapsible breakpoint="lg">
-          <Consumer>
+          {/* <Consumer>
             {({ siderCollapsed, collapsedWidth }) => (
               <Menu
                 style={{ height: '100vh' }}
@@ -25,7 +25,7 @@ class Playground extends Component {
                 collapsedWidth={collapsedWidth}
               />
             )}
-          </Consumer>
+          </Consumer> */}
         </Sider>
         <Layout>
           <Header style={{ background: '#fff' }}>header</Header>

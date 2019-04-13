@@ -80,6 +80,7 @@
     "classnames": "2.2.6",
     "enquire.js": "2.1.6",
     "lodash": "4.17.11",
+    "omit.js": "^1.0.2",
     "prop-types": "15.7.2",
     "warning": "4.0.3"
   },

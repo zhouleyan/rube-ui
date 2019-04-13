@@ -42,7 +42,7 @@ function App({ routeData }) {
         <AuthorizedRoute
           path="/"
           render={props => <BasicLayout {...props} routes={basicRoutes} />}
-          authority={['admins', 'user']}
+          authority={['admin', 'user']}
           redirectTo={{
             pathname: '/auth/login',
             search: getQueryPath('', { redirect: window.location.href }),

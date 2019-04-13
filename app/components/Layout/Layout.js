@@ -1,8 +1,61 @@
-import React, { Children } from 'react';
+/* eslint-disable react/no-multi-comp */
+
+import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-function generator(props) {
+import { ConfigConsumer } from '../ConfigProvider';
+
+export const LayoutContext = createContext({
+  siderHook: {
+    addSider: () => null,
+    removeSider: () => null,
+  },
+});
+
+class BasicLayout extends React.PureComponent {
+  state = { siders: [] };
+
+  getSiderHook() {
+    return {
+      addSider: id => {
+        this.setState(state => ({
+          siders: [...state.siders, id],
+        }));
+      },
+      removeSider: id => {
+        this.setState(state => ({
+          siders: state.siders.filter(currentID => currentID !== id),
+        }));
+      },
+    };
+  }
+
+  render() {
+    const {
+      prefixCls,
+      className,
+      children,
+      hasSider,
+      tagName: Tag,
+      ...others
+    } = this.props;
+    const classString = classNames(className, prefixCls, {
+      [`${prefixCls}-has-sider`]:
+        typeof hasSider === 'boolean' ? hasSider : this.state.siders.length > 0,
+    });
+
+    return (
+      <LayoutContext.Provider value={{ siderHook: this.getSiderHook() }}>
+        <Tag className={classString} {...others}>
+          {children}
+        </Tag>
+      </LayoutContext.Provider>
+    );
+  }
+}
+
+function generator({ suffixCls, tagName }) {
   return BasicComponent =>
     class Adapter extends React.PureComponent {
       static Header;
@@ -13,54 +66,81 @@ function generator(props) {
 
       static Sider;
 
+      static propTypes = {
+        // 类前缀
+        prefixCls: PropTypes.string,
+      };
+
+      renderComponent = ({ getPrefixCls }) => {
+        const { prefixCls: customizePrefixCls } = this.props;
+        const prefixCls = getPrefixCls(suffixCls, customizePrefixCls);
+        return (
+          <BasicComponent
+            prefixCls={prefixCls}
+            tagName={tagName}
+            {...this.props}
+          />
+        );
+      };
+
       render() {
-        const { prefixCls } = props;
-        return <BasicComponent prefixCls={prefixCls} {...this.props} />;
+        return <ConfigConsumer>{this.renderComponent}</ConfigConsumer>;
       }
     };
 }
 
 function Basic(props) {
-  const { prefixCls, className, children, ...others } = props;
-  const divCls = classNames(className, prefixCls);
-  return (
-    <div className={divCls} {...others}>
-      {children}
-    </div>
+  const { prefixCls, className, children, tagName, ...others } = props;
+  const classString = classNames(className, prefixCls);
+  return React.createElement(
+    tagName,
+    { className: classString, ...others },
+    children,
   );
 }
 
-function Layout(props) {
-  const prefixCls = 'rube-layout';
-  const { className, children, ...others } = props;
-
-  const hasSider = Children.toArray(children).some(
-    child => child.type.name === 'Sider',
-  );
-  const classes = classNames(className, prefixCls, {
-    [`${prefixCls}-has-sider`]: hasSider,
-  });
-  return (
-    <div className={classes} {...others}>
-      {Children.toArray(children)}
-    </div>
-  );
-}
-
-Layout.propTypes = {
+Basic.propTypes = {
+  // 类前缀
+  prefixCls: PropTypes.string,
+  // 自定义样式类
+  className: PropTypes.string,
+  // 子元素/组件
   children: PropTypes.node.isRequired,
+  // Tag名称
+  tagName: PropTypes.string,
 };
 
+BasicLayout.propTypes = {
+  // 类前缀
+  prefixCls: PropTypes.string,
+  // 自定义样式类
+  className: PropTypes.string,
+  // 子元素/组件
+  children: PropTypes.node.isRequired,
+  // 是否有Sider
+  hasSider: PropTypes.bool,
+  // Tag名称
+  tagName: PropTypes.string,
+};
+
+const Layout = generator({
+  suffixCls: 'layout',
+  tagName: 'section',
+})(BasicLayout);
+
 const Header = generator({
-  prefixCls: 'rube-layout-header',
+  suffixCls: 'layout-header',
+  tagName: 'header',
 })(Basic);
 
 const Footer = generator({
-  prefixCls: 'rube-layout-footer',
+  suffixCls: 'layout-footer',
+  tagName: 'footer',
 })(Basic);
 
 const Content = generator({
-  prefixCls: 'rube-layout-content',
+  suffixCls: 'layout-content',
+  tagName: 'main',
 })(Basic);
 
 Layout.Header = Header;
