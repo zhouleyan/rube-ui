@@ -1,3 +1,13 @@
+/* Type              Light    Dark
+ * Title             85%      100%
+ * Primary text      65%      85%
+ * Secondary text    45%      65%
+ * Disable           25%      45%
+ * Border            15%      25%
+ * Divider            9%      15%
+ * Background         4%       9%
+ * Table header       2%       4%
+ */
 .rube-button {
   width: 100px;
   height: 30px;

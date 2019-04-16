@@ -1,5 +1,114 @@
+/* Type              Light    Dark
+ * Title             85%      100%
+ * Primary text      65%      85%
+ * Secondary text    45%      65%
+ * Disable           25%      45%
+ * Border            15%      25%
+ * Divider            9%      15%
+ * Background         4%       9%
+ * Table header       2%       4%
+ */
 .rube-input {
-  width: 100px;
-  height: 30px;
-  background: red;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-variant: tabular-nums;
+  -webkit-font-feature-settings: 'tnum';
+          font-feature-settings: 'tnum';
+  position: relative;
+  display: inline-block;
+  padding: 8px 20px;
+  width: 100%;
+  background-image: none;
+  border: 1px solid rgba(62, 61, 83, 0.15);
+  border-radius: 2px;
+  color: rgba(62, 61, 83, 0.65);
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 500;
+  outline: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.rube-input::-moz-placeholder {
+  color: rgba(62, 61, 83, 0.65);
+  opacity: 1;
+}
+.rube-input:-ms-input-placeholder {
+  color: rgba(62, 61, 83, 0.65);
+}
+.rube-input::-webkit-input-placeholder {
+  color: rgba(62, 61, 83, 0.65);
+}
+.rube-input:focus {
+  border-right-width: 1px !important;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px rgba(62, 61, 83, 0.09);
+          box-shadow: 0 0 0 2px rgba(62, 61, 83, 0.09);
+}
+.rube-input-disabled {
+  color: rgba(62, 61, 83, 0.25);
+  background-color: #f6f6f8;
+  cursor: not-allowed;
+  opacity: 1;
+}
+.rube-input[disabled] {
+  color: rgba(62, 61, 83, 0.25);
+  background-color: #f6f6f8;
+  cursor: not-allowed;
+  opacity: 1;
+}
+.rube-input-affix-wrapper {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(62, 61, 83, 0.65);
+  line-height: 1.5;
+  list-style: none;
+  font-size: 12px;
+  font-variant: tabular-nums;
+  -webkit-font-feature-settings: 'tnum';
+          font-feature-settings: 'tnum';
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  text-align: start;
+  font-size: 20px;
+}
+.rube-input-affix-wrapper .rube-input {
+  position: relative;
+  text-align: inherit;
+}
+.rube-input-affix-wrapper .rube-input-prefix,
+.rube-input-affix-wrapper .rube-input-suffix {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  color: rgba(62, 61, 83, 0.65);
+  line-height: 0;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.rube-input-affix-wrapper .rube-input-prefix :not(.rube-icon),
+.rube-input-affix-wrapper .rube-input-suffix :not(.rube-icon) {
+  line-height: 1.5;
+}
+.rube-input-affix-wrapper .rube-input-prefix {
+  left: 15px;
+}
+.rube-input-affix-wrapper .rube-input-suffix {
+  right: 15px;
+}
+.rube-input-affix-wrapper .rube-input:not(:first-child) {
+  padding-left: 50px;
+}
+.rube-input-affix-wrapper .rube-input:not(:last-child) {
+  padding-right: 50px;
+}
+.rube-input-affix-wrapper .rube-input {
+  min-height: 100%;
 }

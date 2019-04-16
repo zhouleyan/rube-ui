@@ -1,3 +1,13 @@
+/* Type              Light    Dark
+ * Title             85%      100%
+ * Primary text      65%      85%
+ * Secondary text    45%      65%
+ * Disable           25%      45%
+ * Border            15%      25%
+ * Divider            9%      15%
+ * Background         4%       9%
+ * Table header       2%       4%
+ */
 .rube-layout {
   display: -webkit-box;
   display: -webkit-flex;
@@ -12,9 +22,14 @@
   -webkit-flex: auto;
       -ms-flex: auto;
           flex: auto;
-  background: #f0f2f5;
+  background: #f6f6f8;
   /* fix firefox can't set height smaller than content on flex item */
   min-height: 0;
+}
+.rube-layout,
+.rube-layout * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .rube-layout.rube-layout-has-sider {
   -webkit-box-orient: horizontal;
@@ -35,7 +50,8 @@
           flex: 0 0 auto;
 }
 .rube-layout-header {
-  background: #001529;
+  padding: 0 50px;
+  background: #fff;
   height: 64px;
   line-height: 64px;
 }
@@ -48,16 +64,18 @@
   min-height: 0;
 }
 .rube-layout-footer {
-  background: #f0f2f5;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
+  padding: 24px 50px;
+  background: #f6f6f8;
+  color: #3e3d53;
+  font-size: 12px;
 }
 .rube-layout-sider {
   position: relative;
-  background: #001529;
-  min-width: 0;
+  background: #3e3d53;
   /* fix firefox can't set height smaller than content on flex item */
-  min-height: 0;
+  min-width: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 .rube-layout-sider-children {
   height: 100%;
@@ -83,7 +101,45 @@
   color: #fff;
   background: #002140;
   z-index: 1;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 .rube-layout-sider-trigger:focus {
   outline: none;
+}
+.rube-layout-sider-zero-width > * {
+  overflow: hidden;
+}
+.rube-layout-sider-zero-width-trigger {
+  position: absolute;
+  top: 64px;
+  right: -36px;
+  width: 36px;
+  height: 42px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 42px;
+  text-align: center;
+  background: #3e3d53;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+.rube-layout-sider-zero-width-trigger:hover {
+  background: #515064;
+}
+.rube-layout-sider-zero-width-trigger-right {
+  left: -36px;
+}
+.rube-layout-sider-light {
+  background: #fff;
+}
+.rube-layout-sider-light .rube-layout-sider-trigger {
+  color: #3e3d53;
+  background: #fff;
+}
+.rube-layout-sider-light .rube-layout-sider-zero-width-trigger {
+  color: #3e3d53;
+  background: #fff;
 }

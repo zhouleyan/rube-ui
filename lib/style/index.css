@@ -1,0 +1,61 @@
+/* Type              Light    Dark
+ * Title             85%      100%
+ * Primary text      65%      85%
+ * Secondary text    45%      65%
+ * Disable           25%      45%
+ * Border            15%      25%
+ * Divider            9%      15%
+ * Background         4%       9%
+ * Table header       2%       4%
+ */
+@-webkit-keyframes loadingCircle {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes loadingCircle {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.rube-icon {
+  display: inline-block;
+  color: inherit;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.rube-icon > * {
+  line-height: 1;
+}
+.rube-icon svg {
+  display: inline-block;
+  color: rgba(62, 61, 83, 0.85);
+  fill: rgba(62, 61, 83, 0.25);
+}
+.rube-icon::before {
+  display: none;
+}
+.rube-icon .rube-icon-icon {
+  display: block;
+}
+.rube-icon[tabindex] {
+  cursor: pointer;
+}
+.rube-icon-spin::before {
+  display: inline-block;
+  -webkit-animation: loadingCircle 1s infinite linear;
+          animation: loadingCircle 1s infinite linear;
+}
+.rube-icon-spin {
+  display: inline-block;
+  -webkit-animation: loadingCircle 1s infinite linear;
+          animation: loadingCircle 1s infinite linear;
+}

@@ -1,8 +1,19 @@
 @import '../../style/themes/default.less';
+@import '../../style/mixins/index.less';
+@import './mixin.less';
 
-@input-prefix-cls: ~'@{rube-prefix}-input';
-.@{input-prefix-cls} {
-  width: 100px;
-  height: 30px;
-  background: red;
+// Input styles
+.@{rube-prefix}-input {
+  .reset-component;
+  .input;
+}
+
+// Input with affix: prefix or suffix
+.@{rube-prefix}-input-affix-wrapper {
+  .reset-component;
+  .input-affix-wrapper(~'@{rube-prefix}-input');
+
+  .@{rube-prefix}-input {
+    min-height: 100%; // use min-height, assume that no smaller height to override
+  }
 }
