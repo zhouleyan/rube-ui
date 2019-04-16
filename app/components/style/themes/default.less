@@ -41,7 +41,11 @@
 // @text-color-inverse: @white;
 // @text-color-dark: fade(@white, 85%);
 // @text-color-secondary-dark: fade(@white, 65%);
+@icon-color: inherit;
 @font-size-base: 12px;
+@font-size-sm: 12px;
+@font-variant-base: tabular-nums;
+@font-feature-settings-base: 'tnum';
 @line-height-base: 1.5;
 
 // Paddings
@@ -53,6 +57,9 @@
 // Paddings for all form controls
 @control-padding-horizontal: @padding-lg;
 @control-padding-horizontal-sm: @padding-xs;
+
+// ICONFONT
+@iconfont-css-prefix: ~'@{rube-prefix}-icon';
 
 // LINK
 @link-color: @primary-color;
@@ -83,6 +90,7 @@
 @input-border-color: @border-color-base;
 @input-font-weight: 500;
 @input-placeholder-color: fade(@text-color, 65%);
+@input-disabled-bg: @disabled-bg;
 @input-outline-offset: 0 0;
 
 @background-color-light: hsv(
@@ -90,10 +98,11 @@
   0,
   98%
 ); // background of header and selected item
-@background-color-base: hsv(0, 0, 96%); // Default grey background color
+// @background-color-base: hsv(0, 0, 96%); // Default grey background color
+@background-color-base: @body-background;
 
 // Disabled states
-@disabled-color: fade(#000, 25%);
+@disabled-color: fade(@info-color, 25%);
 @disabled-bg: @background-color-base;
 @disabled-color-dark: fade(#fff, 35%);
 

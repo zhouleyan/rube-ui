@@ -53,24 +53,6 @@
         color: fade(@text-color, 65%);
         font-weight: @input-font-weight;
       }
-      & input {
-        display: inline-block;
-        padding: @input-padding-vertical-base @input-padding-horizontal-base;
-        width: 100%;
-        border: @border-width-base @border-style-base @input-border-color;
-        border-radius: @border-radius-sm;
-        font-size: @font-size-base;
-        font-weight: @input-font-weight;
-        font-variant: tabular-nums;
-        line-height: @line-height-base;
-        color: fade(@text-color, 65%);
-        outline: none;
-        transition: all 0.2s ease-in-out;
-        .placeholder();
-        &:focus {
-          .active();
-        }
-      }
     }
     .submit {
       text-align: right;

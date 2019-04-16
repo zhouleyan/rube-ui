@@ -9,9 +9,16 @@ import { compose } from 'redux';
 // import { reloadAuthorized } from 'utils/auth';
 
 import LogoWithText from 'images/icons/LogoWithText';
+import Input from 'components/Input';
+import Icon from 'components/Icon';
+import EyeSvg from 'components/Input/icons/EyeSvg';
+import 'components/Input/style';
+
 // import LoginMask from './LoginMask';
 
 import './index.less';
+
+const suffix = <Icon component={EyeSvg} viewBox="0 0 24 24" />;
 
 /* eslint-disable react/prefer-stateless-function, no-console */
 class Login extends PureComponent {
@@ -50,21 +57,26 @@ class Login extends PureComponent {
             <form onSubmit={this.handleSubmit}>
               <div className="login-form-item">
                 <label htmlFor="email">邮箱账户：</label>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="demo@demo.com"
-                />
+                <Input placeholder="demo@demo.com" />
               </div>
               <div className="login-form-item">
                 <label htmlFor="password">密码：</label>
                 <div style={{ position: 'relative' }}>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
+                  <Input
                     placeholder="password"
+                    prefix={suffix}
+                    suffix={suffix}
+                  />
+                </div>
+              </div>
+              <div className="login-form-item">
+                <label htmlFor="password">密码：</label>
+                <div style={{ position: 'relative' }}>
+                  <Input
+                    disabled
+                    placeholder="basic use"
+                    prefix={suffix}
+                    suffix={suffix}
                   />
                 </div>
               </div>
