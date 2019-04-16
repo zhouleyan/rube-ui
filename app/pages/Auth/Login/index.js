@@ -62,11 +62,7 @@ class Login extends PureComponent {
               <div className="login-form-item">
                 <label htmlFor="password">密码：</label>
                 <div style={{ position: 'relative' }}>
-                  <Input
-                    placeholder="password"
-                    prefix={suffix}
-                    suffix={suffix}
-                  />
+                  <Input.Password placeholder="password" />
                 </div>
               </div>
               <div className="login-form-item">
