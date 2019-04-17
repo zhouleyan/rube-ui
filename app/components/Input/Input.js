@@ -21,6 +21,7 @@ class Input extends PureComponent {
   static defaultProps = {
     type: 'text',
     disabled: false,
+    hasError: false,
   };
 
   static propTypes = {
@@ -29,6 +30,7 @@ class Input extends PureComponent {
     size: PropTypes.oneOf(InputSize),
     maxLength: PropTypes.number,
     disabled: PropTypes.bool,
+    hasError: PropTypes.bool,
     value: PropTypes.any,
     defaultValue: PropTypes.any,
     className: PropTypes.string,
@@ -67,11 +69,12 @@ class Input extends PureComponent {
   }
 
   getInputClassName(prefixCls) {
-    const { size, disabled } = this.props;
+    const { size, disabled, hasError } = this.props;
     return classNames(prefixCls, {
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-disabled`]: disabled,
+      [`${prefixCls}-has-error`]: hasError,
     });
   }
 
@@ -181,6 +184,7 @@ class Input extends PureComponent {
       'suffix',
       'allowClear',
       'defaultValue',
+      'hasError',
     ]);
 
     return this.renderLabeledIcon(

@@ -1,0 +1,41 @@
+@import '../../../../components/style/themes/default.less';
+
+.login-form {
+  padding: 24px;
+  background: #fff;
+  border-radius: @border-radius-base;
+  box-shadow: 0 4px 8px 0 rgba(36, 46, 66, 0.06);
+  &-item {
+    margin-top: 20px;
+    & label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      line-height: 20px;
+      color: fade(@text-color, 65%);
+      font-weight: @input-font-weight;
+    }
+  }
+  .submit {
+    text-align: right;
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
+  &-error {
+    padding: @padding-sm @padding-md;
+    border-radius: @border-radius-base;
+    background-color: @second-color;
+    border: solid 1px @primary-color;
+    user-select: none;
+
+    & .rube-icon {
+      vertical-align: -0.23em;
+      font-size: 20px;
+      margin-right: 8px;
+    }
+
+    & svg {
+      fill: @primary-color;
+    }
+  }
+}

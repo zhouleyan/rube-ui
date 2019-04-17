@@ -2,33 +2,22 @@ import React, { PureComponent, Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-// import { push } from 'connected-react-router/immutable';
-// import PropTypes from 'prop-types';
 
-// import { setAuthority } from 'utils/auth/authority';
-// import { reloadAuthorized } from 'utils/auth';
+import { push } from 'connected-react-router/immutable';
+import PropTypes from 'prop-types';
 
+import { setAuthority } from 'utils/auth/authority';
+import { reloadAuthorized } from 'utils/auth';
 import LogoWithText from 'images/icons/LogoWithText';
-import Input from 'components/Input';
-import Button from 'components/Button';
-import Icon from 'components/Icon';
-import EyeSvg from 'components/Input/icons/EyeSvg';
-import 'components/Input/style';
-import 'components/Button/style';
-
-// import LoginMask from './LoginMask';
+import LoginForm from './LoginForm';
 
 import './index.less';
-
-const suffix = <Icon component={EyeSvg} viewBox="0 0 24 24" />;
 
 /* eslint-disable react/prefer-stateless-function, no-console */
 class Login extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: false,
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -39,13 +28,19 @@ class Login extends PureComponent {
     console.log('Login Updated!');
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setState({ loading: true });
+  handleLoginSubmit = (values, actions) => {
+    const { dispatch } = this.props;
+    setTimeout(() => {
+      // console.log(values);
+      actions.setSubmitting(false);
+      setAuthority('admin');
+      reloadAuthorized();
+      dispatch(push('/'));
+    }, 2000);
   };
 
   render() {
-    // const { dispatch } = this.props;
+    const { submitError } = this.state;
     return (
       <Fragment>
         <Helmet>
@@ -63,61 +58,10 @@ class Login extends PureComponent {
               <p>欢迎使用DFM PaaS</p>
               <div className="login-header-mask">登录</div>
             </div>
-            <form onSubmit={this.handleSubmit}>
-              <div className="login-form-item">
-                <label htmlFor="email">邮箱账户：</label>
-                <Input placeholder="demo@demo.com" />
-              </div>
-              <div className="login-form-item">
-                <label htmlFor="password">密码：</label>
-                <div style={{ position: 'relative' }}>
-                  <Input.Password placeholder="password" />
-                </div>
-              </div>
-              <div className="login-form-item">
-                <label htmlFor="password">密码：</label>
-                <div style={{ position: 'relative' }}>
-                  <Input
-                    disabled
-                    placeholder="basic use"
-                    prefix={suffix}
-                    suffix={suffix}
-                  />
-                </div>
-              </div>
-              <div className="submit">
-                <Button
-                  type="primary"
-                  loading={this.state.loading}
-                  onClick={this.handleSubmit}
-                  block
-                >
-                  登录
-                </Button>
-              </div>
-            </form>
-            {/* <button
-              type="submit"
-              onClick={evt => {
-                if (evt !== undefined && evt.preventDefault)
-                  evt.preventDefault();
-                setAuthority('admins');
-                reloadAuthorized();
-                dispatch(push('/'));
-              }}
-            >
-              登录
-            </button>
-            <button
-              type="submit"
-              onClick={evt => {
-                if (evt !== undefined && evt.preventDefault)
-                  evt.preventDefault();
-                dispatch(push('/'));
-              }}
-            >
-              强行进入
-            </button> */}
+            <LoginForm
+              submitError={submitError}
+              onLoginSubmit={this.handleLoginSubmit}
+            />
           </div>
         </div>
       </Fragment>
@@ -126,9 +70,16 @@ class Login extends PureComponent {
 }
 
 Login.propTypes = {
-  // dispatch: PropTypes.func,
+  dispatch: PropTypes.func,
 };
 
-const withConnect = connect();
+const mapDispatchToProps = dispatch => ({
+  dispatch,
+});
+
+const withConnect = connect(
+  null,
+  mapDispatchToProps,
+);
 
 export default compose(withConnect)(Login);
