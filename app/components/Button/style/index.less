@@ -1,8 +1,87 @@
 @import '../../style/themes/default.less';
+@import '../../style/mixins/index.less';
+@import './mixin.less';
 
-@button-prefix-cls: ~'@{rube-prefix}-button';
-.@{button-prefix-cls} {
-  width: 100px;
-  height: 30px;
-  background: blue;
+@btn-prefix-cls: ~'@{rube-prefix}-btn';
+.@{btn-prefix-cls} {
+  // Fixing https://github.com/ant-design/ant-design/issues/12978
+  // It is a render problem of chrome, which is only happened in the codesandbox demo
+  // 0.001px solution works and I don't why
+  line-height: @line-height-base - 0.001;
+  .btn;
+  .btn-primary;
+  > i,
+  > span {
+    display: inline-block;
+    pointer-events: none;
+  }
+
+  &::before {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    z-index: 1;
+    display: none;
+    background: @component-background;
+    border-radius: inherit;
+    opacity: 0.35;
+    transition: opacity 0.2s;
+    content: '';
+    pointer-events: none;
+  }
+
+  .@{iconfont-css-prefix} {
+    transition: margin-left 0.2s ease-in-out;
+    > svg {
+      fill: white;
+    }
+
+    // Follow icon blur under windows. Change the render.
+    // https://github.com/ant-design/ant-design/issues/13924
+    // &.@{iconfont-css-prefix}-plus,
+    // &.@{iconfont-css-prefix}-minus {
+    //   > svg {
+    //     shape-rendering: optimizeSpeed;
+    //   }
+    // }
+  }
+
+  &&-loading {
+    position: relative;
+    pointer-events: none;
+  }
+
+  &&-loading::before {
+    display: block;
+  }
+
+  &&-loading:not(&-circle):not(&-circle-outline):not(&-icon-only) {
+    padding-left: 29px;
+    .@{iconfont-css-prefix}:not(:last-child) {
+      margin-left: -14px;
+    }
+  }
+
+  // http://stackoverflow.com/a/21281554/3040605
+  &:focus > span,
+  &:active > span {
+    position: relative;
+  }
+
+  // To ensure that a space will be placed between character and `Icon`.
+  > .@{iconfont-css-prefix} + span,
+  > span + .@{iconfont-css-prefix} {
+    margin-left: 8px;
+  }
+
+  &-block {
+    width: 100%;
+  }
+
+  // https://github.com/ant-design/ant-design/issues/12681
+  &:empty {
+    vertical-align: top;
+  }
 }

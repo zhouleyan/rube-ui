@@ -10,9 +10,11 @@ import { compose } from 'redux';
 
 import LogoWithText from 'images/icons/LogoWithText';
 import Input from 'components/Input';
+import Button from 'components/Button';
 import Icon from 'components/Icon';
 import EyeSvg from 'components/Input/icons/EyeSvg';
 import 'components/Input/style';
+import 'components/Button/style';
 
 // import LoginMask from './LoginMask';
 
@@ -22,6 +24,13 @@ const suffix = <Icon component={EyeSvg} viewBox="0 0 24 24" />;
 
 /* eslint-disable react/prefer-stateless-function, no-console */
 class Login extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+    };
+  }
+
   componentDidMount() {
     console.log('Login Mounted!');
   }
@@ -32,7 +41,7 @@ class Login extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('ok');
+    this.setState({ loading: true });
   };
 
   render() {
@@ -77,9 +86,14 @@ class Login extends PureComponent {
                 </div>
               </div>
               <div className="submit">
-                <button type="submit">
-                  <span>登录</span>
-                </button>
+                <Button
+                  type="primary"
+                  loading={this.state.loading}
+                  onClick={this.handleSubmit}
+                  block
+                >
+                  登录
+                </Button>
               </div>
             </form>
             {/* <button
