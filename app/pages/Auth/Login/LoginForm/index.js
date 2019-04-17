@@ -14,9 +14,9 @@ import './index.less';
 function LoginForm(props) {
   const { submitError, onLoginSubmit } = props;
   /* eslint-disable compat/compat */
-  function getError(errors, touched) {
+  function getError(errors, touched, submitCount) {
     const key = Object.keys(errors)[0];
-    if (key && touched[key]) {
+    if (key && (touched[key] || submitCount)) {
       return errors[key];
     }
     return submitError;
@@ -39,16 +39,17 @@ function LoginForm(props) {
       {({
         errors,
         touched,
+        submitCount,
         handleChange,
         handleBlur,
         handleSubmit,
         isSubmitting,
       }) => (
         <form onSubmit={handleSubmit}>
-          {getError(errors, touched) && (
+          {getError(errors, touched, submitCount) && (
             <div className="login-form-error">
               <Icon component={WarningSvg} />
-              <span>{getError(errors, touched)}</span>
+              <span>{getError(errors, touched, submitCount)}</span>
             </div>
           )}
           <div className="login-form-item">
