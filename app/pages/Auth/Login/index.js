@@ -48,7 +48,7 @@ class Login extends PureComponent {
           <meta name="description" content="A Rube-UI application loginpage" />
         </Helmet>
         <a className="logo" href="/">
-          <LogoWithText width="200px" />
+          <LogoWithText width="200px" fill="#f6f6f8" />
         </a>
         <div className="background" />
         <div className="login-wrapper">
