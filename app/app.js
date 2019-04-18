@@ -13,6 +13,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router/immutable';
+import FastClick from 'fastclick';
 import history from 'utils/history';
 
 import 'sanitize.css/sanitize.css';
@@ -86,3 +87,5 @@ if (!window.Intl) {
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
+
+FastClick.attach(document.body);
