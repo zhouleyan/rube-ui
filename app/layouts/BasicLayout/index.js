@@ -1,33 +1,24 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createSelector } from 'reselect';
 import { Helmet } from 'react-helmet';
 import { push } from 'connected-react-router/immutable';
-import PropTypes from 'prop-types';
+import { layoutPropsEqual } from 'utils/utils';
 
 import injectReducer from 'utils/injectReducer';
 import { setAuthority } from 'utils/auth/authority';
 import { makeSelectBasic } from './selectors';
 import reducer from './reducer';
 
-/* eslint-disable react/prefer-stateless-function, no-console */
-class BasicLayout extends PureComponent {
-  componentDidMount() {
-    console.log('BasicLayout Mounted!');
-  }
-
-  componentDidUpdate() {
-    console.log('BasicLayout Updated!');
-  }
-
-  componentWillUnmount() {
-    console.log('BasicLayout WillUnmount!');
+class BasicLayout extends Component {
+  shouldComponentUpdate(nextProps) {
+    return layoutPropsEqual(this.props, nextProps);
   }
 
   render() {
-    const { routes, dispatch } = this.props;
-    console.log(routes);
+    const { dispatch } = this.props;
     return (
       <Fragment>
         <Helmet>
@@ -51,7 +42,7 @@ class BasicLayout extends PureComponent {
 }
 
 BasicLayout.propTypes = {
-  routes: PropTypes.array,
+  // routes: PropTypes.array,
   dispatch: PropTypes.func,
 };
 

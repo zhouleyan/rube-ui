@@ -1,11 +1,11 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createSelector } from 'reselect';
 import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types';
-import { getPageQuery, getQueryPath } from 'utils/utils';
+import { getPageQuery, getQueryPath, layoutPropsEqual } from 'utils/utils';
 
 import injectReducer from 'utils/injectReducer';
 import { makeSelectAuth } from './selectors';
@@ -21,14 +21,9 @@ const getLoginPathWithRedirectPath = redirectPath => {
   };
 };
 
-/* eslint-disable react/prefer-stateless-function, no-console */
-class AuthLayout extends PureComponent {
-  componentDidMount() {
-    console.log('AuthLayout Mounted!');
-  }
-
-  componentDidUpdate() {
-    console.log('AuthLayout Updated!');
+class AuthLayout extends Component {
+  shouldComponentUpdate(nextProps) {
+    return layoutPropsEqual(this.props, nextProps);
   }
 
   render() {
