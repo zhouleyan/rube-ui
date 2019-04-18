@@ -19,6 +19,10 @@
   opacity: 1;
 }
 
+.has-error() {
+  border: @border-width-base @border-style-base @primary-color;
+}
+
 // == when hovered
 .input() {
   position: relative;
@@ -46,6 +50,10 @@
 
   &[disabled] {
     .disabled();
+  }
+
+  &&-has-error {
+    .has-error;
   }
 }
 

@@ -95,8 +95,9 @@ function (_PureComponent) {
 
       var _this$props2 = this.props,
           size = _this$props2.size,
-          disabled = _this$props2.disabled;
-      return classNames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-sm"), size === 'small'), _defineProperty(_classNames, "".concat(prefixCls, "-lg"), size === 'large'), _defineProperty(_classNames, "".concat(prefixCls, "-disabled"), disabled), _classNames));
+          disabled = _this$props2.disabled,
+          hasError = _this$props2.hasError;
+      return classNames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-sm"), size === 'small'), _defineProperty(_classNames, "".concat(prefixCls, "-lg"), size === 'large'), _defineProperty(_classNames, "".concat(prefixCls, "-disabled"), disabled), _defineProperty(_classNames, "".concat(prefixCls, "-has-error"), hasError), _classNames));
     }
   }, {
     key: "setValue",
@@ -190,7 +191,7 @@ function (_PureComponent) {
           addonAfter = _this$props5.addonAfter;
       var value = this.state.value; // Parent props
 
-      var otherProps = omit(this.props, ['prefixCls', 'onPressEnter', 'addonBefore', 'addonAfter', 'prefix', 'suffix', 'allowClear', 'defaultValue']);
+      var otherProps = omit(this.props, ['prefixCls', 'onPressEnter', 'addonBefore', 'addonAfter', 'prefix', 'suffix', 'allowClear', 'defaultValue', 'hasError']);
       return this.renderLabeledIcon(prefixCls, React.createElement("input", _extends({}, otherProps, {
         value: fixControlledValue(value),
         onChange: this.handleChange,
@@ -211,7 +212,8 @@ function (_PureComponent) {
 
 _defineProperty(Input, "defaultProps", {
   type: 'text',
-  disabled: false
+  disabled: false,
+  hasError: false
 });
 
 export default Input;

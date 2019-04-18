@@ -1,3 +1,6 @@
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors,string-no-newline */
 /* Type              Light    Dark
  * Title             85%      100%
  * Primary text      65%      85%
@@ -8,8 +11,226 @@
  * Background         4%       9%
  * Table header       2%       4%
  */
-.rube-button {
-  width: 100px;
-  height: 30px;
-  background: blue;
+.rube-btn {
+  line-height: 1.499;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: 1px solid transparent;
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+          box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  padding: 8px 19px;
+  font-size: 12px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #f55864;
+  border-color: #f55864;
+  text-shadow: 0 2px 4px rgba(35, 45, 65, 0.2);
+  -webkit-box-shadow: 0 8px 16px rgba(245, 88, 100, 0.15);
+          box-shadow: 0 8px 16px rgba(245, 88, 100, 0.15);
+}
+.rube-btn > .rube-icon {
+  line-height: 1;
+}
+.rube-btn,
+.rube-btn:active,
+.rube-btn:focus {
+  outline: 0;
+}
+.rube-btn:not([disabled]):hover {
+  text-decoration: none;
+}
+.rube-btn:not([disabled]):active {
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.rube-btn.disabled,
+.rube-btn[disabled] {
+  cursor: not-allowed;
+}
+.rube-btn.disabled > *,
+.rube-btn[disabled] > * {
+  pointer-events: none;
+}
+.rube-btn > a:only-child {
+  color: currentColor;
+}
+.rube-btn > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.rube-btn:hover,
+.rube-btn:focus {
+  color: #fff;
+  background-color: rgba(245, 88, 100, 0.85);
+  border-color: rgba(245, 88, 100, 0.85);
+}
+.rube-btn:hover > a:only-child,
+.rube-btn:focus > a:only-child {
+  color: currentColor;
+}
+.rube-btn:hover > a:only-child::after,
+.rube-btn:focus > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.rube-btn:active,
+.rube-btn.active {
+  color: #fff;
+  background-color: rgba(245, 88, 100, 0.85);
+  border-color: rgba(245, 88, 100, 0.85);
+}
+.rube-btn:active > a:only-child,
+.rube-btn.active > a:only-child {
+  color: currentColor;
+}
+.rube-btn:active > a:only-child::after,
+.rube-btn.active > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.rube-btn-disabled,
+.rube-btn.disabled,
+.rube-btn[disabled],
+.rube-btn-disabled:hover,
+.rube-btn.disabled:hover,
+.rube-btn[disabled]:hover,
+.rube-btn-disabled:focus,
+.rube-btn.disabled:focus,
+.rube-btn[disabled]:focus,
+.rube-btn-disabled:active,
+.rube-btn.disabled:active,
+.rube-btn[disabled]:active,
+.rube-btn-disabled.active,
+.rube-btn.disabled.active,
+.rube-btn[disabled].active {
+  color: rgba(62, 61, 83, 0.25);
+  background-color: #f6f6f8;
+  border-color: rgba(62, 61, 83, 0.15);
+  text-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.rube-btn-disabled > a:only-child,
+.rube-btn.disabled > a:only-child,
+.rube-btn[disabled] > a:only-child,
+.rube-btn-disabled:hover > a:only-child,
+.rube-btn.disabled:hover > a:only-child,
+.rube-btn[disabled]:hover > a:only-child,
+.rube-btn-disabled:focus > a:only-child,
+.rube-btn.disabled:focus > a:only-child,
+.rube-btn[disabled]:focus > a:only-child,
+.rube-btn-disabled:active > a:only-child,
+.rube-btn.disabled:active > a:only-child,
+.rube-btn[disabled]:active > a:only-child,
+.rube-btn-disabled.active > a:only-child,
+.rube-btn.disabled.active > a:only-child,
+.rube-btn[disabled].active > a:only-child {
+  color: currentColor;
+}
+.rube-btn-disabled > a:only-child::after,
+.rube-btn.disabled > a:only-child::after,
+.rube-btn[disabled] > a:only-child::after,
+.rube-btn-disabled:hover > a:only-child::after,
+.rube-btn.disabled:hover > a:only-child::after,
+.rube-btn[disabled]:hover > a:only-child::after,
+.rube-btn-disabled:focus > a:only-child::after,
+.rube-btn.disabled:focus > a:only-child::after,
+.rube-btn[disabled]:focus > a:only-child::after,
+.rube-btn-disabled:active > a:only-child::after,
+.rube-btn.disabled:active > a:only-child::after,
+.rube-btn[disabled]:active > a:only-child::after,
+.rube-btn-disabled.active > a:only-child::after,
+.rube-btn.disabled.active > a:only-child::after,
+.rube-btn[disabled].active > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.rube-btn > i,
+.rube-btn > span {
+  display: inline-block;
+  pointer-events: none;
+}
+.rube-btn::before {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  z-index: 1;
+  display: none;
+  background: #f6f6f8;
+  border-radius: inherit;
+  opacity: 0.35;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  content: '';
+  pointer-events: none;
+}
+.rube-btn .rube-icon {
+  -webkit-transition: margin-left 0.2s ease-in-out;
+  transition: margin-left 0.2s ease-in-out;
+}
+.rube-btn .rube-icon > svg {
+  fill: white;
+}
+.rube-btn.rube-btn-loading {
+  position: relative;
+  pointer-events: none;
+}
+.rube-btn.rube-btn-loading::before {
+  display: block;
+}
+.rube-btn.rube-btn-loading:not(.rube-btn-circle):not(.rube-btn-circle-outline):not(.rube-btn-icon-only) {
+  padding-left: 29px;
+}
+.rube-btn.rube-btn-loading:not(.rube-btn-circle):not(.rube-btn-circle-outline):not(.rube-btn-icon-only) .rube-icon:not(:last-child) {
+  margin-left: -14px;
+}
+.rube-btn:focus > span,
+.rube-btn:active > span {
+  position: relative;
+}
+.rube-btn > .rube-icon + span,
+.rube-btn > span + .rube-icon {
+  margin-left: 8px;
+}
+.rube-btn-block {
+  width: 100%;
+}
+.rube-btn:empty {
+  vertical-align: top;
 }

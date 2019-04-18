@@ -4,12 +4,12 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectAuth = state => state.get('auth', initialState);
+const selectAuth = state => state.auth || initialState;
 
 const makeSelectAuth = () =>
   createSelector(
     selectAuth,
-    authState => authState.toJS(),
+    authState => authState,
   );
 
 export { makeSelectAuth };

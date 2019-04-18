@@ -4,12 +4,12 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectBasic = state => state.get('basic', initialState);
+const selectBasic = state => state.basic || initialState;
 
 const makeSelectBasic = () =>
   createSelector(
     selectBasic,
-    basicState => basicState.toJS(),
+    basicState => basicState,
   );
 
 export { makeSelectBasic };

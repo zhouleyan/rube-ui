@@ -13,6 +13,7 @@ import { Switch, Route } from 'react-router-dom';
 import Authorized from 'utils/auth';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import { getQueryPath } from 'utils/utils';
+import { APP_NAME, APP_DESC } from 'consts';
 import './global-styles.less';
 
 const { AuthorizedRoute } = Authorized;
@@ -25,8 +26,8 @@ function App({ routeData }) {
   ] = routeData;
   return (
     <React.Fragment>
-      <Helmet titleTemplate="%s - Rube-UI" defaultTitle="Rube-UI">
-        <meta name="description" content="A Rube-UI application" />
+      <Helmet titleTemplate={`%s - ${APP_NAME}`} defaultTitle={APP_NAME}>
+        <meta name="description" content={APP_DESC} />
       </Helmet>
       <Switch>
         <Route

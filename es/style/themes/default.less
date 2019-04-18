@@ -1,8 +1,12 @@
+@import '../color/colors.less';
+
 // The prefix to use on all css classes from rube.
 @rube-prefix: rube;
 
 // --------- Colors ---------
-@primary-color: #f55864;
+@primary-color: @red-6;
+
+@second-color: #ffe4bc;
 // Info Color ---
 /* Type              Light    Dark
  * Title             85%      100%
@@ -15,6 +19,8 @@
  * Table header       2%       4%
  */
 @info-color: #3e3d53;
+
+@primary-5: color(~`colorPalette('@{primary-color}', 5) `);
 
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
@@ -92,6 +98,29 @@
 @input-placeholder-color: fade(@text-color, 65%);
 @input-disabled-bg: @disabled-bg;
 @input-outline-offset: 0 0;
+
+// Buttons
+@btn-font-weight: 500;
+@btn-border-radius-base: @border-radius-base;
+@btn-border-radius-sm: @border-radius-base;
+@btn-border-width: @border-width-base;
+@btn-border-style: @border-style-base;
+@btn-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+@btn-primary-shadow: 0 8px 16px fade(@primary-color, 15%);
+@btn-text-shadow: 0 2px 4px rgba(35, 45, 65, 0.2);
+
+@btn-height-base: 36px;
+@btn-height-lg: 40px;
+@btn-height-sm: 24px;
+
+@btn-padding-base: 8px @padding-lg - 1px;
+
+@btn-primary-color: #fff;
+@btn-primary-bg: @primary-color;
+
+@btn-disable-color: @disabled-color;
+@btn-disable-bg: @disabled-bg;
+@btn-disable-border: @border-color-base;
 
 @background-color-light: hsv(
   0,
